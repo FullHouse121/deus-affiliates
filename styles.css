@@ -199,13 +199,14 @@ html { scrollbar-color: #2c2c2c var(--black); }
   pointer-events: none;
   will-change: transform;
 }
-.hero__layer--bw .hero__poster { opacity: .48; }
+.hero__layer--bw .hero__poster { opacity: .3; }
 .hero__layer--color .hero__poster { opacity: .9; filter: saturate(1.35); }
 
 .hero__vignette {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 92% 78% at 50% 44%, transparent 38%, rgba(0,0,0,.7) 100%),
+    radial-gradient(ellipse 62% 52% at 50% 46%, rgba(0,0,0,.5), transparent 72%),
+    radial-gradient(ellipse 92% 78% at 50% 44%, transparent 38%, rgba(0,0,0,.78) 100%),
     linear-gradient(to bottom, rgba(0,0,0,.55), transparent 26%, transparent 72%, #000 100%);
 }
 
