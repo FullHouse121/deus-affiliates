@@ -11,7 +11,7 @@ const finePointer = matchMedia('(pointer:fine)').matches;
 /* Lenis smooth scroll on GSAP ticker (shared RAF) */
 let lenis = null;
 if (!reduced) {
-  lenis = new Lenis({ lerp: 0.11 });
+  lenis = new Lenis({ lerp: 0.1 });
   window.lenis = lenis;
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
@@ -23,6 +23,13 @@ const nav = document.querySelector('.nav');
 const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+/* Scroll progress line under the nav */
+gsap.fromTo('.nav__progress', { scaleX: 0 }, {
+  scaleX: 1,
+  ease: 'none',
+  scrollTrigger: { start: 0, end: 'max', scrub: 0.3 },
+});
 
 /* Mobile menu (scroll-locked, focus-trapped, Escape to close) */
 const burger = document.querySelector('.nav__burger');
@@ -190,7 +197,7 @@ if (!reduced) {
 }
 
 /* Scroll reveals — grids stagger as choreographed groups, the rest one-by-one */
-const batchGroups = ['.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.traffic__grid > .tsource', '.confs > .conf', '.faq > .faq__item'];
+const batchGroups = ['.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.tlist > .tlist__row', '.confs > .conf', '.faq > .faq__item'];
 const batched = new Set();
 if (!reduced) {
   batchGroups.forEach((sel) => {
