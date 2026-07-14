@@ -190,7 +190,7 @@ if (!reduced) {
 }
 
 /* Scroll reveals — grids stagger as choreographed groups, the rest one-by-one */
-const batchGroups = ['.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.confs > .conf', '.faq > .faq__item'];
+const batchGroups = ['.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.traffic__grid > .tsource', '.confs > .conf', '.faq > .faq__item'];
 const batched = new Set();
 if (!reduced) {
   batchGroups.forEach((sel) => {
@@ -267,7 +267,7 @@ faqItems.forEach((item) => {
 {
   const links = Array.from(document.querySelectorAll('.nav__links a'));
   const setActive = (hash) => links.forEach((l) => l.classList.toggle('is-active', l.getAttribute('href') === hash));
-  ['#advantages', '#products', '#conferences', '#faq', '#why'].forEach((hash) => {
+  ['#advantages', '#products', '#traffic', '#conferences', '#faq', '#why'].forEach((hash) => {
     const sec = document.querySelector(hash);
     if (!sec) return;
     ScrollTrigger.create({
