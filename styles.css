@@ -635,7 +635,18 @@ html { scrollbar-color: #2c2c2c var(--black); }
   color: var(--white);
   margin-bottom: 10px;
 }
-.feature h3::before { content: "— "; color: var(--green); }
+
+.feature__icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 18px;
+  color: #9aa09c;
+  transition: color .3s ease, transform .35s cubic-bezier(.65,.05,.36,1);
+}
+.feature:hover .feature__icon { color: var(--white); transform: translateY(-2px); }
+.ic-g { fill: var(--green); }
+.ic-gs { stroke: var(--green); fill: none; }
 .feature p { font-size: 15px; line-height: 1.65; color: var(--muted); }
 
 /* ---------------- Marquee ---------------- */
