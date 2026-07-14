@@ -197,7 +197,7 @@ if (!reduced) {
 }
 
 /* Scroll reveals — grids stagger as choreographed groups, the rest one-by-one */
-const batchGroups = ['.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.tlist > .tlist__row', '.confs > .conf', '.faq > .faq__item'];
+const batchGroups = ['.bento > .bcell', '.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.tlist > .tlist__row', '.confs > .conf', '.faq > .faq__item'];
 const batched = new Set();
 if (!reduced) {
   batchGroups.forEach((sel) => {
