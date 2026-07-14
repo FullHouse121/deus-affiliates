@@ -286,6 +286,33 @@
       </ol>
     </section>
 
+    <!-- ============ Payouts band ============ -->
+    <section class="payouts" aria-label="Payouts">
+      <div class="payouts__inner">
+        <div class="payouts__head" data-reveal>
+          <h2>Fast, weekly payouts</h2>
+          <p>Your money doesn't wait for NET-30. Withdraw every week, any way you like.</p>
+        </div>
+        <div class="payouts__facts">
+          <div class="pfact" data-reveal>
+            <span>$50</span>
+            <p>minimum withdrawal — no lock-ups</p>
+          </div>
+          <div class="pfact" data-reveal>
+            <span>7 days</span>
+            <p>CPA quality audit, then instant release</p>
+          </div>
+          <div class="pfact" data-reveal>
+            <span>24h</span>
+            <p>average processing time on payout day</p>
+          </div>
+        </div>
+        <div class="payouts__methods" data-reveal>
+          <span>USDT</span><span>BTC</span><span>Visa / MC</span><span>Skrill</span><span>Neteller</span><span>Capitalist</span>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ Traffic sources ============ -->
     <section class="section section--line" id="traffic">
       <header class="section__head" data-reveal>
@@ -344,12 +371,31 @@
       </div>
     </section>
 
+    <!-- ============ Scale globally ============ -->
+    <section class="section section--line" id="geos">
+      <header class="section__head section__head--center" data-reveal>
+        <span class="section__index">05</span>
+        <h2 class="section__title">Scale Globally</h2>
+        <p class="section__sub">50+ GEOs with funnels already tested in market. Green dots are where our partners earn right now.</p>
+      </header>
+
+      <figure class="geomap" data-reveal aria-label="World map of active GEOs">
+        <img src="assets/world-dots.svg" alt="" draggable="false" loading="lazy" decoding="async" />
+      </figure>
+
+      <div class="geochips" data-reveal>
+        <span>Brazil</span><span>Mexico</span><span>Argentina</span><span>Chile</span><span>Peru</span><span>Colombia</span>
+        <span>Turkey</span><span>India</span><span>Bangladesh</span><span>Kazakhstan</span><span>Uzbekistan</span><span>Azerbaijan</span>
+        <span>Germany</span><span>Italy</span><span>Spain</span><span>Poland</span><span>Romania</span><span class="geochips__more">+ 30 more</span>
+      </div>
+    </section>
+
     <!-- ============ Why ============ -->
     <section class="section" id="why">
       <div class="why">
         <div class="why__text">
           <header class="section__head" data-reveal>
-            <span class="section__index">05</span>
+            <span class="section__index">06</span>
             <h2 class="section__title">Why Deus&shy;Affiliates</h2>
           </header>
           <p class="why__lead" data-reveal>We're not a reseller network. You work directly with the team that runs the product — so the terms, the tech and the payouts are ours to keep honest.</p>
@@ -374,7 +420,7 @@
     <!-- ============ Conferences ============ -->
     <section class="section section--line" id="conferences">
       <header class="section__head" data-reveal>
-        <span class="section__index">06</span>
+        <span class="section__index">07</span>
         <h2 class="section__title">Conferences</h2>
         <p class="section__sub">Meet the team in person — we're on the road all year. Book a slot and let's talk terms over coffee.</p>
       </header>
@@ -431,7 +477,7 @@
     <!-- ============ FAQ ============ -->
     <section class="section section--line" id="faq">
       <header class="section__head" data-reveal>
-        <span class="section__index">07</span>
+        <span class="section__index">08</span>
         <h2 class="section__title">FAQ</h2>
       </header>
 
@@ -478,10 +524,49 @@
       </div>
       <div class="cta__inner">
         <h2 class="cta__title">Ready<br />to scale?</h2>
-        <p class="cta__sub" data-reveal>Sign up in two minutes. First payout this week.</p>
-        <div data-reveal>
-          <a class="btn btn--green btn--xl" href="https://t.me/deusaffiliates" target="_blank" rel="noopener" data-magnetic>Become a Partner</a>
-        </div>
+        <p class="cta__sub" data-reveal>Apply in two minutes — your personal manager replies within 24 hours.</p>
+
+        <form class="signup" name="partner-application" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-reveal>
+          <input type="hidden" name="form-name" value="partner-application" />
+          <p class="signup__hp" aria-hidden="true">
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+          <div class="signup__grid">
+            <label class="field">
+              <span>Name</span>
+              <input type="text" name="name" required autocomplete="name" placeholder="John Carter" />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+            </label>
+            <label class="field">
+              <span>Telegram / WhatsApp</span>
+              <input type="text" name="messenger" required placeholder="@username" />
+            </label>
+            <label class="field">
+              <span>Main traffic source</span>
+              <select name="traffic_source" required>
+                <option value="" disabled selected>Select a source</option>
+                <option>Facebook / Instagram</option>
+                <option>Google UAC / Search</option>
+                <option>ASO / Apps</option>
+                <option>PWA</option>
+                <option>SEO</option>
+                <option>Telegram</option>
+                <option>Influencers / Streamers</option>
+                <option>Push / In-App</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="field field--full">
+              <span>GEOs you run <em>(optional)</em></span>
+              <input type="text" name="geos" placeholder="BR, MX, TR, IN…" />
+            </label>
+          </div>
+          <button class="btn btn--green btn--xl signup__submit" type="submit" data-magnetic>Send application</button>
+          <p class="signup__alt">Prefer chat? Write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> on Telegram.</p>
+        </form>
       </div>
     </section>
   </main>
@@ -514,6 +599,15 @@
     </div>
     <div class="footer__wordmark" aria-hidden="true">Deus&nbsp;Affiliates</div>
   </footer>
+
+  <div class="fabs">
+    <button class="fab fab--top" type="button" aria-label="Back to top" hidden>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+    <a class="fab fab--tg" href="https://t.me/deusaffiliates" target="_blank" rel="noopener" aria-label="Chat with us on Telegram">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M21.9 4.6c.3-1.2-.9-2.2-2-1.7L2.6 9.9c-1.2.5-1.1 2.2.1 2.6l4.6 1.5 1.7 5.3c.3 1 1.6 1.3 2.4.6l2.5-2.3 4.4 3.2c.9.7 2.2.2 2.4-.9l3.2-15.3zM8.5 13.2l9.1-5.8c.3-.2.6.2.4.5l-7.5 7-.3 3.2-1.7-4.9z"/></svg>
+    </a>
+  </div>
 
   <script type="module" src="/main.js"></script>
 </body>

@@ -263,6 +263,52 @@ faqItems.forEach((item) => {
   });
 });
 
+/* Signup form — AJAX submit to Netlify Forms, inline success state */
+const signupForm = document.querySelector('.signup');
+if (signupForm) {
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = signupForm.querySelector('.signup__submit');
+    signupForm.querySelector('.signup__error')?.remove();
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(signupForm)).toString(),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      signupForm.innerHTML = `
+        <div class="signup__done">
+          <h3>Application received</h3>
+          <p>Your personal manager will reach out within 24 hours.<br />
+          Want to move faster? Write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> right now.</p>
+        </div>`;
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Send application';
+      const p = document.createElement('p');
+      p.className = 'signup__error';
+      p.setAttribute('role', 'alert');
+      p.innerHTML = 'Something went wrong — please try again, or write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> on Telegram.';
+      signupForm.appendChild(p);
+    }
+  });
+}
+
+/* Floating buttons — back-to-top appears after one viewport of scroll */
+const topFab = document.querySelector('.fab--top');
+if (topFab) {
+  const toggleFab = () => { topFab.hidden = window.scrollY < innerHeight * 0.9; };
+  addEventListener('scroll', toggleFab, { passive: true });
+  toggleFab();
+  topFab.addEventListener('click', () => {
+    if (lenis) lenis.scrollTo(0, { duration: 1.1 });
+    else window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  });
+}
+
 /* Active nav link tracking */
 {
   const links = Array.from(document.querySelectorAll('.nav__links a'));
