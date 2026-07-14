@@ -24,7 +24,7 @@
   --black: #000000;
   --ink: #0a0a0a;
   --white: #f4f4f4;
-  --muted: #b9bdbb;
+  --muted: #c3c7c5;
   --green: #2ea664;
   --green-hover: #278f56;
   --border: #262626;
@@ -34,6 +34,9 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
 
 html { scroll-behavior: auto; }
 
@@ -378,6 +381,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 .stat:first-child { border-left: 0; }
 .stat__num {
+  font-variant-numeric: tabular-nums;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(38px, 4.4vw, 64px);
@@ -445,7 +449,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   text-transform: uppercase;
 }
 .deal__value em { font-style: normal; color: var(--green); }
-.deal__desc { font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 22px; }
+.deal__desc { font-size: 15px; line-height: 1.65; color: var(--muted); margin-bottom: 22px; }
 .deal__list { list-style: none; margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
 .deal__list li {
   position: relative;
@@ -486,7 +490,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   margin-bottom: 10px;
 }
 .feature h3::before { content: "— "; color: var(--green); }
-.feature p { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.feature p { font-size: 15px; line-height: 1.65; color: var(--muted); }
 
 /* ---------------- Marquee ---------------- */
 
@@ -574,10 +578,10 @@ html { scrollbar-color: #2c2c2c var(--black); }
   margin-bottom: 14px;
 }
 .product:hover .product__name { color: var(--green); }
-.product p { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.product p { font-size: 15px; line-height: 1.65; color: var(--muted); }
 .product__meta { margin-top: auto; padding-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
 .product__meta span {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .08em;
@@ -621,10 +625,10 @@ html { scrollbar-color: #2c2c2c var(--black); }
   color: var(--white);
   margin-bottom: 10px;
 }
-.step p { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.step p { font-size: 15px; line-height: 1.65; color: var(--muted); }
 .step__chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
 .step__chips span {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -676,10 +680,10 @@ html { scrollbar-color: #2c2c2c var(--black); }
   line-height: 1;
   margin-bottom: 10px;
 }
-.pfact p { font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+.pfact p { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
 .payouts__methods { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
 .payouts__methods span {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -775,8 +779,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .tlist__row:hover .tlist__main h3 { color: var(--green); transform: translateX(6px); }
 .tlist__main p {
   margin-top: 6px;
-  font-size: 13.5px;
-  line-height: 1.5;
+  font-size: 14.5px;
+  line-height: 1.6;
   color: var(--muted);
   max-width: 480px;
 }
@@ -821,7 +825,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   position: relative;
   padding: 12px 0 12px 26px;
   border-top: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 14.5px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -836,8 +840,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
   margin-top: 18px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--muted);
 }
 
@@ -931,9 +935,9 @@ html { scrollbar-color: #2c2c2c var(--black); }
   line-height: 1.1;
 }
 .conf:hover .conf__name { color: var(--green); }
-.conf__loc { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
+.conf__loc { display: block; margin-top: 4px; font-size: 14.5px; color: var(--muted); }
 .conf__badge {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -959,7 +963,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .conf__cta svg { transition: transform .3s cubic-bezier(.65,.05,.36,1); }
 .conf__cta:hover { color: var(--green); }
 .conf__cta:hover svg { transform: translateX(4px); }
-.confs__note { margin-top: 26px; font-size: 14px; color: var(--muted); }
+.confs__note { margin-top: 26px; font-size: 14.5px; color: var(--muted); }
 .confs__note a { color: var(--green); border-bottom: 1px solid transparent; transition: border-color .25s ease; }
 .confs__note a:hover { border-color: var(--green); }
 
@@ -1014,7 +1018,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 .faq__a > p {
   overflow: hidden;
-  font-size: 15px;
+  font-size: 15.5px;
   line-height: 1.65;
   color: var(--muted);
   max-width: 720px;
@@ -1080,7 +1084,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .cta__points li {
   position: relative;
   padding-left: 24px;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--white);
 }
@@ -1145,7 +1149,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   cursor: pointer;
 }
 .field select:invalid { color: #6b6f6d; }
-.field input::placeholder { color: #565a58; }
+.field input::placeholder { color: #6f7472; }
 .field input:focus-visible, .field select:focus-visible { border-color: var(--green); outline: none; }
 .signup__submit { width: 100%; }
 .signup__submit[disabled] { opacity: .6; pointer-events: none; }
@@ -1210,7 +1214,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   gap: 40px;
 }
 .footer__brand img { height: 30px; width: auto; margin-bottom: 18px; }
-.footer__brand p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.footer__brand p { font-size: 14.5px; line-height: 1.65; color: var(--muted); }
 .footer__col { display: flex; flex-direction: column; gap: 12px; }
 .footer__col h4 {
   font-family: var(--font-display);
