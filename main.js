@@ -2,8 +2,52 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { translations } from './i18n.js';
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* ---------------- i18n ----------------
+   Text nodes are translated by their English source text; original
+   strings are cached so switching back to EN restores them. */
+const norm = (s) => s.replace(/\s+/g, ' ').trim();
+let currentLang = 'en';
+const t = (s) => (translations[currentLang] && translations[currentLang][s]) || s;
+
+const textNodes = [];
+{
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(n) {
+      const p = n.parentElement;
+      if (!p || /^(SCRIPT|STYLE|NOSCRIPT)$/.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+      return norm(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    },
+  });
+  let n;
+  while ((n = walker.nextNode())) textNodes.push([n, norm(n.nodeValue)]);
+}
+const attrNodes = [];
+document.querySelectorAll('input[placeholder]').forEach((el) => attrNodes.push([el, 'placeholder', el.getAttribute('placeholder')]));
+document.querySelectorAll('[aria-label]').forEach((el) => attrNodes.push([el, 'aria-label', el.getAttribute('aria-label')]));
+
+const setLang = (lang) => {
+  currentLang = translations[lang] ? lang : 'en';
+  const dict = translations[currentLang] || {};
+  textNodes.forEach(([node, orig]) => {
+    const out = dict[orig] || orig;
+    if (norm(node.nodeValue) !== out) node.nodeValue = out;
+  });
+  attrNodes.forEach(([el, attr, orig]) => el.setAttribute(attr, dict[orig] || orig));
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('.lang__btn').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === currentLang));
+  try { localStorage.setItem('deus-lang', currentLang); } catch { /* private mode */ }
+  if (window.ScrollTrigger) ScrollTrigger.refresh();
+};
+document.querySelectorAll('.lang__btn').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+{
+  let saved = null;
+  try { saved = localStorage.getItem('deus-lang'); } catch { /* private mode */ }
+  if (saved && saved !== 'en') setLang(saved);
+}
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(pointer:fine)').matches;
@@ -418,7 +462,7 @@ if (signupForm) {
     const btn = signupForm.querySelector('.signup__submit');
     signupForm.querySelector('.signup__error')?.remove();
     btn.disabled = true;
-    btn.textContent = 'Sending…';
+    btn.textContent = t('Sending…');
     try {
       const res = await fetch('/', {
         method: 'POST',
@@ -428,17 +472,17 @@ if (signupForm) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       signupForm.innerHTML = `
         <div class="signup__done">
-          <h3>Application received</h3>
-          <p>Your personal manager will reach out within 24 hours.<br />
-          Want to move faster? Write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> right now.</p>
+          <h3>${t('Application received')}</h3>
+          <p>${t('Your personal manager will reach out within 24 hours.')}<br />
+          ${t('Want to move faster? Write to')} <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> ${t('right now.')}</p>
         </div>`;
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = 'Send application';
+      btn.textContent = t('Send application');
       const p = document.createElement('p');
       p.className = 'signup__error';
       p.setAttribute('role', 'alert');
-      p.innerHTML = 'Something went wrong. Please try again, or write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> on Telegram.';
+      p.innerHTML = `${t('Something went wrong. Please try again, or write to')} <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> ${t('on Telegram.')}`;
       signupForm.appendChild(p);
     }
   });
