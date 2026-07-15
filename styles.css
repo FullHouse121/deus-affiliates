@@ -678,7 +678,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   letter-spacing: .04em;
   color: var(--muted);
 }
-.bcell__meta::before { content: "— "; color: var(--green); }
+.bcell__meta { color: var(--muted); }
 
 /* ---------------- Stats strip ---------------- */
 
@@ -839,7 +839,6 @@ html { scrollbar-color: #2c2c2c var(--black); }
   color: var(--green);
   margin-bottom: 14px;
 }
-.team__label::before { content: "— "; }
 .team__head h2 {
   font-family: var(--font-display);
   font-weight: 700;

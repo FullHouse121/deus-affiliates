@@ -438,7 +438,7 @@ if (signupForm) {
       const p = document.createElement('p');
       p.className = 'signup__error';
       p.setAttribute('role', 'alert');
-      p.innerHTML = 'Something went wrong — please try again, or write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> on Telegram.';
+      p.innerHTML = 'Something went wrong. Please try again, or write to <a href="https://t.me/deusaffiliates" target="_blank" rel="noopener">@deusaffiliates</a> on Telegram.';
       signupForm.appendChild(p);
     }
   });
