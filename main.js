@@ -34,6 +34,15 @@ gsap.fromTo('.nav__progress', { scaleX: 0 }, {
   scrollTrigger: { start: 0, end: 'max', scrub: 0.3 },
 });
 
+/* Fixed backdrop drifts slower than the page — depth without clutter */
+if (!reduced) {
+  gsap.fromTo('.backdrop img', { yPercent: -2.5 }, {
+    yPercent: 2.5,
+    ease: 'none',
+    scrollTrigger: { start: 0, end: 'max', scrub: 0.6 },
+  });
+}
+
 /* Mobile menu (scroll-locked, focus-trapped, Escape to close) */
 const burger = document.querySelector('.nav__burger');
 const mobileMenu = document.querySelector('.mobile-menu');

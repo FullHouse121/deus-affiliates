@@ -257,6 +257,26 @@ html { scrollbar-color: #2c2c2c var(--black); }
   background: radial-gradient(ellipse 130% 105% at 50% 45%, transparent 64%, rgba(0,0,0,.3) 100%);
 }
 
+/* fixed halftone backdrop — the poster looms faintly behind every section
+   while the content scrolls over it (cinematic depth, still clean) */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  opacity: .09;
+  transform: scale(1.1);
+  will-change: transform;
+}
+.is-cine .backdrop img { opacity: .11; filter: blur(6px) brightness(.7); }
+
 /* anamorphic light sweep — a flare crossing the lens every few seconds */
 .hero__sweep {
   position: absolute;
