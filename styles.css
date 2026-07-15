@@ -1034,6 +1034,36 @@ html { scrollbar-color: #2c2c2c var(--black); }
   pointer-events: none;
 }
 
+/* traffic arcs — routes drawing between hubs in a loop */
+.geoarcs {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.geoarcs path {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 1.1;
+  opacity: .4;
+  vector-effect: non-scaling-stroke;
+}
+
+/* transmission wave — a square pulse radiating from a hub */
+.geowave {
+  position: absolute;
+  width: 24%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(66,216,134,.8);
+  background: radial-gradient(circle, rgba(46,166,100,.14), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* live beacons — square pulse, brutalist */
 .geopin {
   position: absolute;
@@ -1106,6 +1136,14 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 .geochips span:hover { color: var(--white); border-color: var(--green); }
 .geochips__more { color: var(--green) !important; border-color: rgba(46,166,100,.45) !important; }
+
+.geo__cta {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
 /* ---------------- Traffic sources ---------------- */
 

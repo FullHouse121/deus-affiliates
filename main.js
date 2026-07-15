@@ -348,6 +348,61 @@ if (!reduced) {
     });
   }
 }
+/* traffic arcs — each route draws, holds, fades, repeats */
+if (!reduced) {
+  document.querySelectorAll('.geoarcs path').forEach((arc, i) => {
+    const len = arc.getTotalLength();
+    gsap.set(arc, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.timeline({
+      repeat: -1,
+      repeatDelay: 2.4,
+      delay: i * 0.85,
+      scrollTrigger: { trigger: '.geomap', start: 'top 78%', once: true },
+    })
+      .to(arc, { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut' })
+      .to(arc, { opacity: 0, duration: 0.6 }, '+=0.9')
+      .set(arc, { strokeDashoffset: len, opacity: 0.4 });
+  });
+}
+
+/* transmission wave — roams from hub to hub */
+const geowave = document.querySelector('.geowave');
+const geopins = gsap.utils.toArray('.geopin');
+if (geowave && geopins.length && !reduced) {
+  let wi = 0;
+  const fireWave = () => {
+    const pin = geopins[wi % geopins.length];
+    wi += 1;
+    geowave.style.left = pin.style.left;
+    geowave.style.top = pin.style.top;
+    gsap.fromTo(geowave, { scale: 0.12, opacity: 0.6 }, {
+      scale: 1, opacity: 0, duration: 1.8, ease: 'power1.out',
+      onComplete: () => gsap.delayedCall(2.4, fireWave),
+    });
+  };
+  ScrollTrigger.create({ trigger: '.geomap', start: 'top 78%', once: true, onEnter: fireWave });
+}
+
+/* hologram tilt — the map leans toward the cursor (desktop) */
+if (cine) {
+  const gm = document.querySelector('.geomap');
+  if (gm) {
+    gsap.set(gm, { transformPerspective: 900 });
+    const rx = gsap.quickTo(gm, 'rotationX', { duration: 0.8, ease: 'power3.out' });
+    const ry = gsap.quickTo(gm, 'rotationY', { duration: 0.8, ease: 'power3.out' });
+    let rect = null;
+    gm.addEventListener('mouseenter', () => { rect = gm.getBoundingClientRect(); });
+    gm.addEventListener('mousemove', (e) => {
+      if (!rect) rect = gm.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      ry(nx * 5);
+      rx(ny * -5);
+    }, { passive: true });
+    gm.addEventListener('mouseleave', () => { rect = null; rx(0); ry(0); });
+  }
+}
+
 document.querySelectorAll('.geochips span[data-geo]').forEach((chip) => {
   const pin = document.querySelector(`.geopin[data-geo="${chip.dataset.geo}"]`);
   if (!pin) return;
