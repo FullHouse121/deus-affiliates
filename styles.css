@@ -65,6 +65,20 @@ html { scrollbar-color: #2c2c2c var(--black); }
   border-radius: 2px;
 }
 
+.skiplink {
+  position: fixed;
+  top: 10px; left: 10px;
+  z-index: 300;
+  background: var(--green);
+  color: #000;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 2px;
+  transform: translateY(-200%);
+}
+.skiplink:focus-visible { transform: none; }
+
 /* ---------------- Nav ---------------- */
 
 .nav {
@@ -1257,65 +1271,6 @@ html { scrollbar-color: #2c2c2c var(--black); }
   color: var(--muted);
 }
 
-/* ---------------- Why ---------------- */
-
-.why {
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: clamp(40px, 6vw, 96px);
-  align-items: center;
-}
-.why .section__head { margin-bottom: 28px; }
-.why__lead { font-size: 17.5px; line-height: 1.65; color: var(--white); margin-bottom: 30px; max-width: 520px; }
-.why__list { list-style: none; display: flex; flex-direction: column; margin-bottom: 38px; }
-.why__list li {
-  position: relative;
-  padding: 16px 0 16px 34px;
-  border-top: 1px solid var(--border);
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--muted);
-}
-.why__list li:last-child { border-bottom: 1px solid var(--border); }
-.why__list li::before {
-  content: "";
-  position: absolute;
-  left: 2px; top: 22px;
-  width: 14px; height: 8px;
-  border-left: 2px solid var(--green);
-  border-bottom: 2px solid var(--green);
-  transform: rotate(-45deg);
-}
-.why__figure { position: relative; margin: 0; }
-.why__frame {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-}
-.why__img {
-  width: 100%;
-  aspect-ratio: 4 / 3.4;
-  object-fit: cover;
-  display: block;
-  transform: scale(1.08); /* headroom for the scroll parallax */
-}
-.why__img--color {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  opacity: 0;
-  transition: opacity .5s ease;
-}
-.why__figure:hover .why__img--color { opacity: 1; }
-.why__figure figcaption {
-  margin-top: 12px;
-  font-size: 12px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 /* ---------------- Conferences ---------------- */
 
 .confs { list-style: none; border-top: 1px solid var(--border); }
@@ -1405,10 +1360,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
   text-align: left;
   padding: 22px 4px;
   font-family: var(--font-display);
-  font-size: clamp(16px, 1.6vw, 20px);
+  font-size: clamp(17px, 1.7vw, 21px);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .01em;
   color: var(--white);
   transition: color .25s ease;
 }
@@ -1565,7 +1518,14 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .field input:focus-visible, .field select:focus-visible { border-color: var(--green); outline: none; }
 .signup__submit { width: 100%; }
 .signup__submit[disabled] { opacity: .6; pointer-events: none; }
-.signup__alt { margin-top: 18px; text-align: center; font-size: 13.5px; color: var(--muted); }
+.signup__privacy {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  color: #8b908d;
+}
+.signup__alt { margin-top: 12px; text-align: center; font-size: 13.5px; color: var(--muted); }
 .signup__alt a { color: var(--green); border-bottom: 1px solid transparent; transition: border-color .25s ease; }
 .signup__alt a:hover { border-color: var(--green); }
 .signup__done { text-align: center; padding: 28px 8px; }
@@ -1680,8 +1640,6 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .product { min-height: 260px; }
   .steps { grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--border); }
   .step { border-bottom: 1px solid var(--border); }
-  .why { grid-template-columns: 1fr; }
-  .why__figure { max-width: 560px; }
   .bento { grid-template-columns: 1fr 1fr; }
   .bcell--text, .bcell--img, .bcell--chart, .bcell--week { grid-column: span 2; }
   .bcell--img { min-height: 280px; }

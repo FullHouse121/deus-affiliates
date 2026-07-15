@@ -126,7 +126,27 @@ const heroEntrance = () => {
     .fromTo('.hero__sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.0)
     .fromTo('.hero__cta', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.12);
 };
-if (!reduced) {
+/* returning visitors in the same session skip the loader + full cold open */
+const returning = (() => {
+  try {
+    const seen = sessionStorage.getItem('deus-seen');
+    sessionStorage.setItem('deus-seen', '1');
+    return !!seen;
+  } catch { return false; }
+})();
+
+const heroQuickEntrance = () => {
+  gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: () => { startIdleCinema(); startExitShot(); } })
+    .from('.hero__poster', { scale: 1.12, opacity: 0, duration: 0.9, ease: 'power2.out' }, 0)
+    .to('.hero__title .l > span', { y: 0, duration: 0.8, stagger: 0.06 }, 0.05)
+    .fromTo('.hero__sub', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.3)
+    .fromTo('.hero__cta', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.4);
+};
+
+if (!reduced && returning) {
+  loader.remove();
+  heroQuickEntrance();
+} else if (!reduced) {
   const loaded = document.readyState === 'complete'
     ? Promise.resolve()
     : new Promise((r) => addEventListener('load', r, { once: true }));
@@ -197,15 +217,6 @@ const attachSpotlight = (container, layer) => {
 if (!reduced && finePointer) {
   attachSpotlight(document.querySelector('.hero'), document.querySelector('.hero__layer--color'));
   attachSpotlight(document.querySelector('.cta'), document.querySelector('.cta__layer--color'));
-}
-
-/* Why-figure scroll parallax */
-if (!reduced) {
-  gsap.fromTo('.why__figure .why__img', { y: -16 }, {
-    y: 16,
-    ease: 'none',
-    scrollTrigger: { trigger: '.why__figure', start: 'top bottom', end: 'bottom top', scrub: true },
-  });
 }
 
 /* Magnetic buttons (fine pointers, rect cached per hover) */
@@ -460,7 +471,7 @@ if (topFab) {
 {
   const links = Array.from(document.querySelectorAll('.nav__links a'));
   const setActive = (hash) => links.forEach((l) => l.classList.toggle('is-active', l.getAttribute('href') === hash));
-  ['#advantages', '#products', '#traffic', '#conferences', '#faq', '#why'].forEach((hash) => {
+  ['#advantages', '#products', '#how', '#traffic', '#conferences', '#faq'].forEach((hash) => {
     const sec = document.querySelector(hash);
     if (!sec) return;
     ScrollTrigger.create({
