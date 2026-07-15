@@ -313,6 +313,27 @@ faqItems.forEach((item) => {
   });
 });
 
+/* GEO map — beacons pop in staggered; chips light up their pin */
+if (!reduced) {
+  const pins = gsap.utils.toArray('.geopin');
+  if (pins.length) {
+    gsap.from(pins, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.5,
+      ease: 'back.out(2.5)',
+      stagger: 0.09,
+      scrollTrigger: { trigger: '.geomap', start: 'top 70%', once: true },
+    });
+  }
+}
+document.querySelectorAll('.geochips span[data-geo]').forEach((chip) => {
+  const pin = document.querySelector(`.geopin[data-geo="${chip.dataset.geo}"]`);
+  if (!pin) return;
+  chip.addEventListener('mouseenter', () => pin.classList.add('is-hot'));
+  chip.addEventListener('mouseleave', () => pin.classList.remove('is-hot'));
+});
+
 /* Signup form — AJAX submit to Netlify Forms, inline success state */
 const signupForm = document.querySelector('.signup');
 if (signupForm) {

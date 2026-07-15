@@ -271,11 +271,11 @@ html { scrollbar-color: #2c2c2c var(--black); }
   height: 100%;
   object-fit: cover;
   object-position: 50% 42%;
-  opacity: .09;
+  opacity: .055;
   transform: scale(1.1);
   will-change: transform;
 }
-.is-cine .backdrop img { opacity: .11; filter: blur(6px) brightness(.7); }
+.is-cine .backdrop img { opacity: .07; filter: blur(6px) brightness(.7); }
 
 /* anamorphic light sweep — a flare crossing the lens every few seconds */
 .hero__sweep {
@@ -952,6 +952,13 @@ html { scrollbar-color: #2c2c2c var(--black); }
   position: relative;
 }
 .geomap img { width: 100%; height: auto; }
+.geomap::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  background: radial-gradient(ellipse 55% 55% at 50% 48%, rgba(46,166,100,.09), transparent 70%);
+  pointer-events: none;
+}
 .geomap::after {
   content: "";
   position: absolute;
@@ -959,6 +966,58 @@ html { scrollbar-color: #2c2c2c var(--black); }
   background: radial-gradient(ellipse 60% 60% at 50% 50%, transparent 55%, var(--black) 100%);
   pointer-events: none;
 }
+
+/* live beacons — square pulse, brutalist */
+.geopin {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.geopin i {
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(46,166,100,.7);
+}
+.geopin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--green);
+  animation: geopulse 2.6s cubic-bezier(.2,.6,.36,1) infinite;
+}
+@keyframes geopulse {
+  0% { transform: scale(1); opacity: .9; }
+  70%, 100% { transform: scale(3.4); opacity: 0; }
+}
+.geopin em {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(0,0,0,.82);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.geopin:hover em, .geopin.is-hot em { opacity: 1; }
+.geopin.is-hot i { transform: scale(1.5); box-shadow: 0 0 16px rgba(46,166,100,.9); }
+.geopin i { transition: transform .25s ease, box-shadow .25s ease; }
+@media (prefers-reduced-motion: reduce) { .geopin::before { animation: none; opacity: 0; } }
+
+.geochips span[data-geo] { cursor: default; }
 .geochips {
   margin: 36px auto 0;
   max-width: 880px;
