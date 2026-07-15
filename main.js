@@ -313,9 +313,12 @@ faqItems.forEach((item) => {
   });
 });
 
-/* Growth chart — line draws itself in, then the node and end-label land */
+/* Growth chart — draws itself in, then keeps breathing like a live feed */
 const chartLine = document.querySelector('.chartline');
 if (chartLine && !reduced) {
+  // same point count as the markup paths, endpoints pinned so node/badge stay put
+  const LINE_B = 'M0,152 L50,146 L100,132 L150,126 L200,94 L250,82 L300,50 L350,34 L386,14';
+  const AREA_B = LINE_B.replace('M', 'M') + ' L386,170 L0,170 Z';
   const len = chartLine.getTotalLength();
   gsap.set(chartLine, { strokeDasharray: len, strokeDashoffset: len });
   gsap.set('.chartarea', { opacity: 0 });
@@ -323,7 +326,12 @@ if (chartLine && !reduced) {
   gsap.timeline({ scrollTrigger: { trigger: '.bcell--chart', start: 'top 78%', once: true } })
     .to(chartLine, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' })
     .to('.chartarea', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5')
-    .to('.chartnode, .chartlab--end', { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, '-=0.25');
+    .to('.chartnode, .chartlab--end', { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, '-=0.25')
+    .call(() => {
+      gsap.set(chartLine, { strokeDasharray: 'none' }); // free the path for morphing
+      gsap.to(chartLine, { attr: { d: LINE_B }, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      gsap.to('.chartarea', { attr: { d: AREA_B }, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    });
 }
 
 /* GEO map — beacons pop in staggered; chips light up their pin */
