@@ -1036,16 +1036,16 @@ html { scrollbar-color: #2c2c2c var(--black); }
 /* live beacons — square pulse, brutalist */
 .geopin {
   position: absolute;
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   transform: translate(-50%, -50%);
   z-index: 2;
 }
 .geopin i {
   position: absolute;
   inset: 0;
-  background: var(--green);
-  box-shadow: 0 0 10px rgba(46,166,100,.7);
+  background: #42d886;
+  box-shadow: 0 0 14px rgba(66,216,134,.9), 0 0 34px rgba(46,166,100,.45);
 }
 .geopin::before {
   content: "";
