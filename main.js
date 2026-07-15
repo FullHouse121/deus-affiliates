@@ -251,7 +251,7 @@ if (!reduced) {
 }
 
 /* Scroll reveals — grids stagger as choreographed groups, the rest one-by-one */
-const batchGroups = ['.bento > .bcell', '.deals > .deal', '.features > .feature', '.products > .product', '.steps > .step', '.tlist > .tlist__row', '.confs > .conf', '.faq > .faq__item'];
+const batchGroups = ['.bento > .bcell', '.deals > .deal', '.features > .feature', '.team__grid > .tcard', '.products > .product', '.steps > .step', '.tlist > .tlist__row', '.confs > .conf', '.faq > .faq__item'];
 const batched = new Set();
 if (!reduced) {
   batchGroups.forEach((sel) => {
@@ -275,17 +275,6 @@ if (!reduced) {
       scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
   });
-}
-
-/* Marquee — GSAP-driven, reacts to scroll velocity (speeds up, reverses) */
-const marqueeTrack = document.querySelector('.marquee__track');
-if (marqueeTrack && !reduced) {
-  marqueeTrack.classList.add('is-js');
-  const tween = gsap.to(marqueeTrack, { xPercent: -50, ease: 'none', duration: 30, repeat: -1 });
-  if (lenis) {
-    const setTS = gsap.quickTo(tween, 'timeScale', { duration: 0.35, ease: 'power2.out' });
-    lenis.on('scroll', (e) => setTS(gsap.utils.clamp(-4, 6, 1 + e.velocity / 6)));
-  }
 }
 
 /* Stat counters */
