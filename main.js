@@ -29,7 +29,7 @@ const attrNodes = [];
 document.querySelectorAll('input[placeholder]').forEach((el) => attrNodes.push([el, 'placeholder', el.getAttribute('placeholder')]));
 document.querySelectorAll('[aria-label]').forEach((el) => attrNodes.push([el, 'aria-label', el.getAttribute('aria-label')]));
 
-const LANG_FLAGS = { en: 'gb', ru: 'ru', pt: 'br', es: 'es' };
+const LANG_FLAGS = { en: 'gb', ru: 'ru', pt: 'br', es: 'es', tr: 'tr', de: 'de', fr: 'fr' };
 const langDrop = document.querySelector('[data-lang-menu]');
 const langTrigger = langDrop?.querySelector('.lang__trigger');
 const closeLangMenu = () => {
@@ -49,7 +49,7 @@ const setLang = (lang) => {
   document.querySelectorAll('.lang__btn').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === currentLang));
   if (langTrigger) {
     langTrigger.querySelector('img').src = `assets/flags/${LANG_FLAGS[currentLang]}.svg`;
-    langTrigger.querySelector('span').textContent = currentLang.toUpperCase();
+    langTrigger.setAttribute('aria-label', 'Language: ' + currentLang.toUpperCase());
   }
   try { localStorage.setItem('deus-lang', currentLang); } catch { /* private mode */ }
   if (window.ScrollTrigger) ScrollTrigger.refresh();
