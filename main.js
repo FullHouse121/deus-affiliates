@@ -7,6 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(pointer:fine)').matches;
+/* cinematic tier: rack focus, drift & sweep only where the GPU can afford it */
+const cine = !reduced && finePointer && innerWidth > 900;
+document.documentElement.classList.toggle('is-cine', cine);
 
 /* Lenis smooth scroll on GSAP ticker (shared RAF) */
 let lenis = null;
@@ -74,14 +77,45 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
   });
 });
 
-/* Intro loader → hero entrance */
+/* Intro loader → cinematic cold open */
 const loader = document.querySelector('.loader');
+
+/* idle cinematography: perpetual Ken Burns drift + anamorphic light sweep */
+const startIdleCinema = () => {
+  if (!cine) return;
+  gsap.to('.hero__bg', { scale: 1.05, duration: 22, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  gsap.to('.hero__bg', { xPercent: 0.6, duration: 29, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  gsap.fromTo('.hero__sweep', { xPercent: -120 }, {
+    xPercent: 120, duration: 2.6, ease: 'power2.inOut', repeat: -1, repeatDelay: 6.4, delay: 2.5,
+  });
+};
+
+/* exit shot: scrolling away pushes the camera in, defocuses and cuts to black */
+const startExitShot = () => {
+  const scrub = { trigger: '.hero', start: 'top top', end: 'bottom 15%', scrub: true };
+  gsap.to('.hero__fade', { opacity: 1, ease: 'none', scrollTrigger: scrub });
+  gsap.to('.hero__poster', { scale: 1.14, ease: 'none', immediateRender: false, scrollTrigger: scrub });
+  if (cine) gsap.to(document.documentElement, { '--cineblur': '13px', ease: 'none', scrollTrigger: scrub });
+  // the CTA answers with the mirrored shot: it settles into focus as it enters
+  gsap.fromTo('.cta__poster', { scale: 1.12 }, {
+    scale: 1, ease: 'none',
+    scrollTrigger: { trigger: '.cta', start: 'top 95%', end: 'top 25%', scrub: true },
+  });
+};
+
 const heroEntrance = () => {
-  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-  tl.to('.hero__title .l > span', { y: 0, duration: 1.15, stagger: 0.09 }, 0.1)
-    .fromTo('.hero__sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 0.57)
-    .fromTo('.hero__cta', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 0.69)
-    .from('.hero__poster', { scale: 1.1, opacity: 0, duration: 1.6, ease: 'power2.out' }, 0);
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, onComplete: () => { startIdleCinema(); startExitShot(); } });
+  // cold open: extreme close-up on the DEUSMACHINE bar → dolly out
+  gsap.set('.hero__poster', { transformOrigin: '50% 55%' });
+  gsap.set('.hero__bar', { yPercent: 0 }); // letterbox on for the opening shot
+  tl.fromTo('.hero__poster', { scale: 2.4 }, { scale: 1, duration: 2.1, ease: 'expo.out' }, 0)
+    .from('.hero__poster', { opacity: 0, duration: 0.5, ease: 'power1.out' }, 0);
+  if (cine) tl.fromTo(document.documentElement, { '--cineblur': '18px' }, { '--cineblur': '5px', duration: 2.1, ease: 'expo.out' }, 0);
+  tl.to('.hero__bar--top', { yPercent: -101, duration: 1.05, ease: 'power4.inOut' }, 0.6)
+    .to('.hero__bar--bottom', { yPercent: 101, duration: 1.05, ease: 'power4.inOut' }, 0.6)
+    .to('.hero__title .l > span', { y: 0, duration: 1.15, stagger: 0.09 }, 0.55)
+    .fromTo('.hero__sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.0)
+    .fromTo('.hero__cta', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.12);
 };
 if (!reduced) {
   const loaded = document.readyState === 'complete'
