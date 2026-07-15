@@ -29,6 +29,14 @@ const attrNodes = [];
 document.querySelectorAll('input[placeholder]').forEach((el) => attrNodes.push([el, 'placeholder', el.getAttribute('placeholder')]));
 document.querySelectorAll('[aria-label]').forEach((el) => attrNodes.push([el, 'aria-label', el.getAttribute('aria-label')]));
 
+const LANG_FLAGS = { en: 'gb', ru: 'ru', pt: 'br', es: 'es' };
+const langDrop = document.querySelector('[data-lang-menu]');
+const langTrigger = langDrop?.querySelector('.lang__trigger');
+const closeLangMenu = () => {
+  langDrop?.classList.remove('is-open');
+  langTrigger?.setAttribute('aria-expanded', 'false');
+};
+
 const setLang = (lang) => {
   currentLang = translations[lang] ? lang : 'en';
   const dict = translations[currentLang] || {};
@@ -39,10 +47,21 @@ const setLang = (lang) => {
   attrNodes.forEach(([el, attr, orig]) => el.setAttribute(attr, dict[orig] || orig));
   document.documentElement.lang = currentLang;
   document.querySelectorAll('.lang__btn').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === currentLang));
+  if (langTrigger) {
+    langTrigger.querySelector('img').src = `assets/flags/${LANG_FLAGS[currentLang]}.svg`;
+    langTrigger.querySelector('span').textContent = currentLang.toUpperCase();
+  }
   try { localStorage.setItem('deus-lang', currentLang); } catch { /* private mode */ }
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 };
-document.querySelectorAll('.lang__btn').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+document.querySelectorAll('.lang__btn').forEach((b) => b.addEventListener('click', () => { setLang(b.dataset.lang); closeLangMenu(); }));
+langTrigger?.addEventListener('click', () => {
+  const open = !langDrop.classList.contains('is-open');
+  langDrop.classList.toggle('is-open', open);
+  langTrigger.setAttribute('aria-expanded', String(open));
+});
+document.addEventListener('click', (e) => { if (langDrop && !langDrop.contains(e.target)) closeLangMenu(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLangMenu(); });
 {
   let saved = null;
   try { saved = localStorage.getItem('deus-lang'); } catch { /* private mode */ }
