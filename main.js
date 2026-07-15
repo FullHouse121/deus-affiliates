@@ -190,7 +190,7 @@ const attachSpotlight = (container, layer) => {
   if (!container || !layer) return;
   const mx = gsap.quickTo(layer, '--mx', { duration: 0.45, ease: 'power3.out' });
   const my = gsap.quickTo(layer, '--my', { duration: 0.45, ease: 'power3.out' });
-  const spotRadius = () => Math.min(innerWidth * 0.22, 320);
+  const spotRadius = () => Math.min(innerWidth * 0.2, 280);
 
   // rect cached per hover; invalidated on scroll/resize so mousemove stays layout-read-free
   let rect = null;
