@@ -560,34 +560,100 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .bcell--img__overlay h3 { font-size: clamp(30px, 3vw, 44px); }
 .bcell--img__overlay p { margin-top: 10px; font-size: 14.5px; line-height: 1.55; color: var(--muted); max-width: 300px; }
 
-.bcell--chart { grid-column: span 5; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; }
+.bcell--chart { grid-column: span 5; min-height: 300px; display: flex; flex-direction: column; justify-content: flex-end; }
 .bcell__chart {
   position: absolute;
   inset: auto 0 0 0;
   width: 100%;
-  height: 62%;
-  opacity: .5;
+  height: 64%;
+  opacity: .85;
   pointer-events: none;
 }
 .bcell--chart h3, .bcell--chart > p { position: relative; }
 .bcell--chart > p { margin-top: 10px; font-size: 14.5px; line-height: 1.6; color: var(--muted); max-width: 340px; }
 
+.chartnode {
+  position: absolute;
+  right: calc(3.5% - 4px);
+  bottom: calc(64% - 5.3%);
+  width: 9px; height: 9px;
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(46,166,100,.8);
+}
+.chartnode::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--green);
+  animation: geopulse 2.6s cubic-bezier(.2,.6,.36,1) infinite;
+}
+@media (prefers-reduced-motion: reduce) { .chartnode::before { animation: none; opacity: 0; } }
+.chartlab {
+  position: absolute;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.chartlab--start {
+  left: clamp(24px, 2.6vw, 38px);
+  top: clamp(24px, 2.6vw, 38px);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.7);
+}
+.chartlab--start::after { content: " →"; color: var(--green); }
+.chartlab--end {
+  right: calc(3.5% + 12px);
+  bottom: calc(64% - 5.3% + 14px);
+  color: #000;
+  background: var(--green);
+}
+
 .bcell--week { grid-column: span 7; display: flex; flex-direction: column; }
-.bcell__mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 22px 0; }
+.bcell__mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0; }
 .bcell__mini > div {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 2px;
   background: var(--black);
   padding: 18px 16px;
+  transition: border-color .3s ease;
 }
+.bcell__mini > div:hover { border-color: var(--green); }
+/* timeline chevrons between the day tiles */
+.bcell__mini > div:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  width: 8px; height: 8px;
+  border-top: 2px solid var(--green);
+  border-right: 2px solid var(--green);
+  transform: translateY(-50%) rotate(45deg);
+  z-index: 1;
+}
+.mini__icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 14px;
+  color: #9aa09c;
+  transition: color .3s ease;
+}
+.bcell__mini > div:hover .mini__icon { color: var(--white); }
 .bcell__mini span {
   display: block;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: .18em;
+  text-transform: uppercase;
   color: var(--green);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .bcell__mini p { font-size: 14px; line-height: 1.5; color: var(--white); }
 .bcell__meta {
@@ -1616,6 +1682,12 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .signup__grid { grid-template-columns: 1fr; }
   .fab { width: 44px; height: 44px; }
   .bcell__mini { grid-template-columns: 1fr; }
+  .bcell__mini > div:not(:last-child)::after {
+    right: 50%;
+    top: auto;
+    bottom: -12px;
+    transform: translateX(50%) rotate(135deg);
+  }
   .bcell__foot { flex-direction: column; gap: 18px; }
 }
 

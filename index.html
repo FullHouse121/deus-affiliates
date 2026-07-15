@@ -178,16 +178,24 @@
         </article>
 
         <article class="bcell bcell--chart">
-          <svg class="bcell__chart" viewBox="0 0 400 160" preserveAspectRatio="none" aria-hidden="true">
+          <svg class="bcell__chart" viewBox="0 0 400 170" preserveAspectRatio="none" aria-hidden="true">
             <defs>
               <linearGradient id="chartfill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#2ea664" stop-opacity=".28" />
+                <stop offset="0%" stop-color="#2ea664" stop-opacity=".38" />
                 <stop offset="100%" stop-color="#2ea664" stop-opacity="0" />
               </linearGradient>
             </defs>
-            <path d="M0,150 L50,138 L100,142 L150,118 L200,104 L250,72 L300,58 L350,26 L400,10 L400,160 L0,160 Z" fill="url(#chartfill)" />
-            <path d="M0,150 L50,138 L100,142 L150,118 L200,104 L250,72 L300,58 L350,26 L400,10" fill="none" stroke="#2ea664" stroke-width="2.5" vector-effect="non-scaling-stroke" />
+            <g stroke="#2e3330" stroke-width="1" stroke-dasharray="1 7">
+              <line x1="0" y1="46" x2="400" y2="46" />
+              <line x1="0" y1="88" x2="400" y2="88" />
+              <line x1="0" y1="130" x2="400" y2="130" />
+            </g>
+            <path class="chartarea" d="M0,152 L50,140 L100,144 L150,118 L200,104 L250,72 L300,58 L350,28 L386,14 L386,170 L0,170 Z" fill="url(#chartfill)" />
+            <path class="chartline" d="M0,152 L50,140 L100,144 L150,118 L200,104 L250,72 L300,58 L350,28 L386,14" fill="none" stroke="#2ea664" stroke-width="2.5" vector-effect="non-scaling-stroke" />
           </svg>
+          <span class="chartnode" aria-hidden="true"></span>
+          <span class="chartlab chartlab--start" aria-hidden="true">RevShare 50%</span>
+          <span class="chartlab chartlab--end" aria-hidden="true">60%</span>
           <h3>Built to scale</h3>
           <p>Caps rise as your volume proves out — rates, creatives and GEOs renegotiated as you grow, not once a year.</p>
         </article>
@@ -195,9 +203,38 @@
         <article class="bcell bcell--week">
           <h3>Week one with DEUS</h3>
           <div class="bcell__mini">
-            <div><span>01</span><p>Tracking link in minutes</p></div>
-            <div><span>02</span><p>Localized promo pack</p></div>
-            <div><span>03</span><p>Personal manager on Telegram</p></div>
+            <div>
+              <svg class="mini__icon" viewBox="0 0 28 28" aria-hidden="true">
+                <rect x="2.5" y="9" width="9" height="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+                <rect x="16.5" y="9" width="9" height="10" fill="none" stroke="currentColor" stroke-width="1.5" />
+                <rect x="9.5" y="12.8" width="9" height="2.4" class="ic-g" />
+                <circle cx="7" cy="24.5" r="1.2" fill="currentColor" opacity=".45" />
+                <circle cx="14" cy="24.5" r="1.2" fill="currentColor" opacity=".45" />
+                <circle cx="21" cy="24.5" r="1.2" fill="currentColor" opacity=".45" />
+              </svg>
+              <span>Day 1</span>
+              <p>Sign up — tracking link in minutes</p>
+            </div>
+            <div>
+              <svg class="mini__icon" viewBox="0 0 28 28" aria-hidden="true">
+                <rect x="9" y="3.5" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".45" />
+                <rect x="6" y="6.5" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7" />
+                <rect x="3" y="9.5" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" />
+                <rect x="6.5" y="18" width="5" height="3" class="ic-g" />
+              </svg>
+              <span>Day 2</span>
+              <p>Localized promo pack + manager on Telegram</p>
+            </div>
+            <div>
+              <svg class="mini__icon" viewBox="0 0 28 28" aria-hidden="true">
+                <rect x="4" y="12" width="20" height="13" fill="none" stroke="currentColor" stroke-width="1.5" />
+                <path d="M14 20V3.5M14 3.5l-4 4M14 3.5l4 4" fill="none" class="ic-gs" stroke-width="1.8" />
+                <circle cx="9" cy="20.5" r="1.2" fill="currentColor" opacity=".45" />
+                <circle cx="19" cy="20.5" r="1.2" fill="currentColor" opacity=".45" />
+              </svg>
+              <span>Day 7</span>
+              <p>First payout request on the table</p>
+            </div>
           </div>
           <p class="bcell__meta">On the road all year — meet us at SiGMA, SBC Summit &amp; Affiliate World</p>
         </article>

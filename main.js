@@ -313,6 +313,19 @@ faqItems.forEach((item) => {
   });
 });
 
+/* Growth chart — line draws itself in, then the node and end-label land */
+const chartLine = document.querySelector('.chartline');
+if (chartLine && !reduced) {
+  const len = chartLine.getTotalLength();
+  gsap.set(chartLine, { strokeDasharray: len, strokeDashoffset: len });
+  gsap.set('.chartarea', { opacity: 0 });
+  gsap.set('.chartnode, .chartlab--end', { opacity: 0, scale: 0.4, transformOrigin: '50% 50%' });
+  gsap.timeline({ scrollTrigger: { trigger: '.bcell--chart', start: 'top 78%', once: true } })
+    .to(chartLine, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' })
+    .to('.chartarea', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+    .to('.chartnode, .chartlab--end', { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, '-=0.25');
+}
+
 /* GEO map — beacons pop in staggered; chips light up their pin */
 if (!reduced) {
   const pins = gsap.utils.toArray('.geopin');
