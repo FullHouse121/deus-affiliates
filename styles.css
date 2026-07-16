@@ -1837,7 +1837,6 @@ html { scrollbar-color: #2c2c2c var(--black); }
   gap: clamp(32px, 4.5vw, 72px);
   align-items: start;
 }
-.faq__wrap .faq__contact { grid-column: 1 / -1; }
 
 /* Telegram-style deal window */
 .chatwin {
