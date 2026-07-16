@@ -533,6 +533,22 @@ if (topFab) {
   });
 }
 
+/* FAQ chat — messages arrive one by one */
+if (!reduced) {
+  gsap.utils.toArray('.chat__msg').forEach((msg, i) => {
+    gsap.from(msg, {
+      y: 18,
+      scale: 0.92,
+      opacity: 0,
+      duration: 0.55,
+      ease: 'back.out(1.8)',
+      transformOrigin: msg.classList.contains('chat__msg--out') ? 'right bottom' : 'left bottom',
+      delay: i * 0.4,
+      scrollTrigger: { trigger: '.chat', start: 'top 78%', once: true },
+    });
+  });
+}
+
 /* Active nav link tracking */
 {
   const links = Array.from(document.querySelectorAll('.nav__links a'));

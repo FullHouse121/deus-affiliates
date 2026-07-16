@@ -1654,7 +1654,68 @@ html { scrollbar-color: #2c2c2c var(--black); }
 
 /* ---------------- FAQ ---------------- */
 
-.faq { max-width: 860px; counter-reset: faq; }
+.faq__wrap {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: clamp(32px, 4.5vw, 72px);
+  align-items: start;
+}
+.faq__wrap .faq__contact { grid-column: 1 / -1; }
+
+/* Telegram-style deal thread, brutalist skin */
+.chat {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.chat__msg { display: flex; gap: 10px; align-items: flex-end; }
+.chat__msg--out { justify-content: flex-end; }
+.chat__ava {
+  flex: 0 0 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 1.5px 1.5px, rgba(255,255,255,.22) 1.5px, transparent 2px) 0 0 / 7px 7px,
+    #151817;
+}
+.chat__ava--deus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0c0b;
+  border-color: rgba(46,166,100,.5);
+}
+.chat__ava--deus img { height: 16px; width: auto; }
+.chat__bubble {
+  max-width: 340px;
+  border-radius: 8px;
+  padding: 12px 14px 8px;
+}
+.chat__msg--in .chat__bubble {
+  background: var(--ink);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 2px;
+}
+.chat__msg--out .chat__bubble {
+  background: var(--green);
+  border-bottom-right-radius: 2px;
+}
+.chat__bubble p { font-size: 14px; line-height: 1.55; color: var(--white); }
+.chat__msg--out .chat__bubble p { color: #06170d; font-weight: 500; }
+.chat__bubble time {
+  display: block;
+  text-align: right;
+  margin-top: 6px;
+  font-size: 10.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.chat__msg--out .chat__bubble time { color: rgba(6,23,13,.65); }
+
+.faq { counter-reset: faq; }
 .faq__item { border-top: 1px solid var(--border); counter-increment: faq; }
 .faq__q::before {
   content: "0" counter(faq);
@@ -1998,6 +2059,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .bcell--img { min-height: 280px; }
   .team__grid { grid-template-columns: repeat(2, 1fr); }
   .showcase { grid-template-columns: 1fr; }
+  .faq__wrap { grid-template-columns: 1fr; }
+  .chat { position: static; max-width: 480px; }
   .traffic { grid-template-columns: 1fr; }
   .traffic__side { position: static; }
   .traffic__no { max-width: 640px; }
