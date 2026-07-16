@@ -188,8 +188,7 @@ const heroEntrance = () => {
     .to('.hero__bar--bottom', { yPercent: 101, duration: 1.05, ease: 'power4.inOut' }, 0.6)
     .to('.hero__title .l > span', { y: 0, duration: 1.15, stagger: 0.09 }, 0.55)
     .fromTo('.hero__sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.0)
-    .fromTo('.hero__cta', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.12)
-    .fromTo('.hero__terms', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.26);
+    .fromTo('.hero__cta', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.12);
 };
 /* returning visitors in the same session skip the loader + full cold open */
 const returning = (() => {
@@ -205,8 +204,7 @@ const heroQuickEntrance = () => {
     .from('.hero__poster', { scale: 1.12, opacity: 0, duration: 0.9, ease: 'power2.out' }, 0)
     .to('.hero__title .l > span', { y: 0, duration: 0.8, stagger: 0.06 }, 0.05)
     .fromTo('.hero__sub', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.3)
-    .fromTo('.hero__cta', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.4)
-    .fromTo('.hero__terms', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.5);
+    .fromTo('.hero__cta', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.4);
 };
 
 if (!reduced && returning) {
@@ -230,7 +228,7 @@ if (!reduced && returning) {
 } else {
   loader.remove();
   document.querySelectorAll('.hero__title .l > span').forEach(el => el.style.transform = 'none');
-  document.querySelectorAll('.hero__sub, .hero__cta, .hero__terms').forEach(el => el.style.opacity = 1);
+  document.querySelectorAll('.hero__sub, .hero__cta').forEach(el => el.style.opacity = 1);
 }
 
 /* Poster mouse parallax (bw + color layers move as one so they stay aligned) */
