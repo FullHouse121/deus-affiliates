@@ -1209,23 +1209,27 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .pmark {
   font-family: var(--font-display);
   color: var(--white);
-  opacity: .5;
+  opacity: .65;
   white-space: nowrap;
   transition: opacity .3s ease;
   cursor: default;
 }
 .pmark:hover { opacity: 1; }
-.pmark--d { font-weight: 800; font-size: 19px; font-style: italic; letter-spacing: .02em; }
+.pmark--d { font-weight: 800; font-size: 21px; font-style: italic; letter-spacing: .01em; }
 .pmark-img {
-  height: 24px;
   width: auto;
   filter: brightness(0) invert(1);
-  opacity: .55;
+  opacity: .65;
   transition: opacity .3s ease;
 }
 .pmark-img:hover { opacity: 1; }
-.pmark--e { font-weight: 700; font-size: 18px; letter-spacing: .08em; }
-.pmark--g { font-weight: 700; font-size: 18px; letter-spacing: .14em; }
+.pmark-img--pragmatic { height: 54px; opacity: .8; }
+.pmark-img--pgsoft { height: 27px; }
+.pmark-img--evolution { height: 25px; }
+.pmark-img--hacksaw { height: 38px; }
+.pmark-img--spribe { height: 26px; }
+.pmark--e { font-weight: 800; font-size: 20px; letter-spacing: .03em; }
+.pmark--g { font-weight: 800; font-size: 20px; letter-spacing: .06em; }
 
 /* ---------------- Steps ---------------- */
 
