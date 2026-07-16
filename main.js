@@ -2,7 +2,6 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { initGlobe } from './globe.js';
 import { translations } from './i18n.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -428,7 +427,18 @@ document.querySelectorAll('.seg').forEach((seg) => {
       if (animate && !reduced) gsap.fromTo(target, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
       window.deusGlobe?.focus(sel.selectedOptions[0]?.dataset.iso || null);
     };
-    window.deusGlobe = initGlobe(document.querySelector('.globe'));
+    const globeHost = document.querySelector('.globe');
+    if (globeHost) {
+      const globeIO = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        globeIO.disconnect();
+        import('./globe.js').then(({ initGlobe }) => {
+          window.deusGlobe = initGlobe(globeHost);
+          window.deusGlobe?.focus(sel.selectedOptions[0]?.dataset.iso || null);
+        });
+      }, { rootMargin: '700px' });
+      globeIO.observe(globeHost);
+    }
     sel.addEventListener('change', () => apply(true));
     apply(false);
   }
