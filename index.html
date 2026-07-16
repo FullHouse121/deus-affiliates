@@ -812,7 +812,8 @@
         <p class="section__sub">50+ GEOs with funnels already tested in market. Green dots are where our partners earn right now.</p>
       </header>
 
-      <figure class="geomap" data-reveal aria-label="World map of active GEOs">
+      <div class="geos__wrap" data-reveal>
+      <figure class="geomap" aria-label="World map of active GEOs">
         <img src="assets/world-dots.svg" alt="" draggable="false" loading="lazy" decoding="async" />
         <svg class="geoarcs" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <path d="M19.5,46.2 Q27,42 34.5,68.6" />
@@ -833,8 +834,9 @@
       </figure>
 
 
-      <div class="rates" data-reveal>
+      <div class="rates">
         <div class="rates__intro">
+          <span class="rates__tick"><i></i>Live baselines</span>
           <h3>Check your GEO</h3>
           <p>Pick a market to see the working CPA baseline. Exact rate depends on your source and volumes, your manager locks it in.</p>
           <label class="rates__field">
@@ -898,7 +900,7 @@
           </div>
         </div>
       </div>
-
+      </div>
 
       <div class="geo__cta" data-reveal>
         <a class="btn btn--green" href="#signup" data-magnetic>Become a Partner</a>

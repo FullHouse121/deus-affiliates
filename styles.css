@@ -875,32 +875,55 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .deal:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.35), 0 0 46px rgba(46,166,100,.15); }
 .deal--accent { background: linear-gradient(180deg, rgba(46,166,100,.14), rgba(46,166,100,.04)), var(--ink); border-color: rgba(46,166,100,.45); box-shadow: 0 0 54px rgba(46,166,100,.10); }
 
-/* --- GEO rate lookup --- */
+/* --- GEO rate lookup (Scale Globally console) --- */
+.geos__wrap {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: clamp(26px, 3.5vw, 56px);
+  align-items: center;
+}
 .rates {
-  margin-top: 14px;
   border: 1px solid var(--border);
   border-radius: 2px;
-  background: var(--ink);
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: clamp(28px, 4vw, 64px);
-  padding: clamp(26px, 2.6vw, 40px);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 1.6px) 0 0 / 14px 14px,
+    var(--ink);
+  padding: clamp(22px, 2.2vw, 32px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.rates__tick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.rates__tick i {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  box-shadow: 0 0 10px rgba(46,166,100,.8);
+  animation: geopulse-dot 2s ease-in-out infinite;
 }
 .rates__intro h3 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(20px, 1.8vw, 26px);
+  font-size: clamp(19px, 1.7vw, 24px);
   text-transform: uppercase;
   color: var(--white);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .rates__intro > p {
-  font-size: 14.5px;
+  font-size: 13.5px;
   line-height: 1.6;
   color: var(--muted);
-  max-width: 420px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
+.rates__field { display: block; margin-bottom: 18px; }
 .rates__field span {
   display: block;
   font-size: 11px;
@@ -920,44 +943,43 @@ html { scrollbar-color: #2c2c2c var(--black); }
   color: var(--white);
   font: inherit;
   font-size: 15px;
-  padding: 14px 44px 14px 16px;
+  padding: 13px 44px 13px 15px;
   cursor: pointer;
   transition: border-color .25s ease, box-shadow .3s ease;
 }
 .rates__select:hover, .rates__select:focus-visible { border-color: var(--green); outline: none; box-shadow: 0 0 24px rgba(46,166,100,.18); }
-.rates__result { display: flex; align-items: center; }
-.rates__nums {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(18px, 2.5vw, 34px);
-  width: 100%;
-}
 .rates__num {
-  border-left: 2px solid var(--green);
-  padding-left: clamp(14px, 1.6vw, 22px);
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding: 12px 0;
 }
 .rates__label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--muted);
 }
+.rates__note { grid-column: 1; font-size: 12px; line-height: 1.45; color: var(--muted); opacity: .8; margin-top: 3px; }
 .rates__num b {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(24px, 2.4vw, 36px);
+  font-size: clamp(22px, 1.9vw, 30px);
   line-height: 1;
   color: var(--white);
+  text-align: right;
+  white-space: nowrap;
 }
 .rates__num b em { font-style: normal; }
 .rates__num .rates__cpa { color: var(--green); }
-.rates__note { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
 .rates__nums[hidden], .rates__talk[hidden] { display: none; }
-.rates__talk p { font-size: 15px; line-height: 1.6; color: var(--muted); max-width: 440px; margin-bottom: 18px; }
+.rates__talk { border-top: 1px solid var(--border); padding-top: 16px; }
+.rates__talk p { font-size: 14px; line-height: 1.6; color: var(--muted); margin-bottom: 16px; }
 .deal__model {
   font-size: 12.5px;
   font-weight: 600;
@@ -1591,8 +1613,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .section__head--center .section__sub { margin-left: auto; margin-right: auto; }
 
 .geomap {
-  margin: 0 auto;
-  max-width: 1080px;
+  margin: 0;
+  max-width: none;
   position: relative;
 }
 .geomap img { width: 100%; height: auto; }
@@ -2385,8 +2407,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .team__grid { grid-template-columns: repeat(2, 1fr); }
   .showcase { grid-template-columns: 1fr; }
   .handshot { width: 100%; margin-left: 0; }
-  .rates { grid-template-columns: 1fr; }
-  .rates__nums { grid-template-columns: 1fr; gap: 18px; }
+  .geos__wrap { grid-template-columns: 1fr; }
   .faq__wrap { grid-template-columns: 1fr; }
   .chatwin { position: static; margin: 0 auto; }
   .traffic { grid-template-columns: 1fr; }
