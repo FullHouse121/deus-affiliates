@@ -1162,27 +1162,20 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 .showcase__rows p { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
 
-/* CSS phone mock — stands in until the generated product shot arrives */
-.phonemock {
-  width: min(300px, 78vw);
-  aspect-ratio: 300 / 620;
-  border: 1px solid #3a3d3b;
-  border-radius: 40px;
-  background: #060707;
-  padding: 12px;
-  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 6px rgba(255,255,255,.02);
+/* real product shot: hand-held phone on transparency */
+.showcase__device { position: relative; }
+.showcase__device::before {
+  content: "";
+  position: absolute;
+  inset: 8% 0;
+  background: radial-gradient(ellipse 55% 48% at 50% 46%, rgba(46,166,100,.16), transparent 70%);
+  pointer-events: none;
 }
-.phonemock__screen {
-  height: 100%;
-  border-radius: 30px;
-  background: #090b0a;
-  overflow: hidden;
-}
-.phonemock__shot {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+.handshot {
+  position: relative;
+  width: min(460px, 88vw);
+  height: auto;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.6));
 }
 
 /* ---------------- Brand ticker band ---------------- */
@@ -1237,14 +1230,17 @@ html { scrollbar-color: #2c2c2c var(--black); }
   cursor: default;
 }
 .pmark:hover { opacity: 1; }
-.pmark--a { font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
-.pmark--b { font-weight: 700; font-size: 18px; letter-spacing: .22em; }
-.pmark--c { font-weight: 600; font-size: 19px; letter-spacing: .3em; }
 .pmark--d { font-weight: 800; font-size: 19px; font-style: italic; letter-spacing: .02em; }
+.pmark-img {
+  height: 24px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: .55;
+  transition: opacity .3s ease;
+}
+.pmark-img:hover { opacity: 1; }
 .pmark--e { font-weight: 700; font-size: 18px; letter-spacing: .08em; }
-.pmark--f { font-weight: 800; font-size: 20px; letter-spacing: -0.03em; }
 .pmark--g { font-weight: 700; font-size: 18px; letter-spacing: .14em; }
-.pmark--h { font-weight: 600; font-size: 19px; letter-spacing: .34em; }
 
 /* ---------------- Steps ---------------- */
 
@@ -1337,6 +1333,13 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 .pfact p { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
 .payouts__methods { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.paychip img {
+  display: block;
+  height: 15px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: .85;
+}
 .payouts__methods span {
   font-size: 12px;
   font-weight: 600;

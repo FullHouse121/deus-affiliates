@@ -482,9 +482,9 @@ document.querySelectorAll('.seg').forEach((seg) => {
   });
 });
 
-/* phone mock idles with a slow float until the real product shot replaces it */
-if (!reduced && document.querySelector('.phonemock')) {
-  gsap.to('.phonemock', { y: -10, rotation: 0.6, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+/* the product shot idles with a slow float */
+if (!reduced && document.querySelector('.handshot')) {
+  gsap.to('.handshot', { y: -10, rotation: 0.6, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
 }
 
 /* Signup form — AJAX submit to Netlify Forms, inline success state */
