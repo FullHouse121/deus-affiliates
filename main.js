@@ -533,20 +533,20 @@ if (topFab) {
   });
 }
 
-/* FAQ chat — messages arrive one by one */
-if (!reduced) {
-  gsap.utils.toArray('.chat__msg').forEach((msg, i) => {
-    gsap.from(msg, {
-      y: 18,
-      scale: 0.92,
-      opacity: 0,
-      duration: 0.55,
-      ease: 'back.out(1.8)',
-      transformOrigin: msg.classList.contains('chat__msg--out') ? 'right bottom' : 'left bottom',
-      delay: i * 0.4,
-      scrollTrigger: { trigger: '.chat', start: 'top 78%', once: true },
-    });
-  });
+/* FAQ chat — the conversation plays out: msg, typing…, reply, msg */
+if (!reduced && document.querySelector('.chatwin')) {
+  const msgs = gsap.utils.toArray('.chatwin__body .chat__msg:not(.chat__typing)');
+  const typing = document.querySelector('.chat__typing');
+  const pop = { y: 16, scale: 0.9, opacity: 0, duration: 0.5, ease: 'back.out(1.8)' };
+  gsap.set(msgs, { y: 16, scale: 0.9, opacity: 0 });
+  gsap.set(typing, { opacity: 0 });
+  gsap.timeline({ scrollTrigger: { trigger: '.chatwin', start: 'top 75%', once: true } })
+    .to(msgs[0], { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.8)', transformOrigin: 'left bottom' }, 0.1)
+    .to(typing, { opacity: 1, duration: 0.25 }, '+=0.4')
+    .to(typing, { opacity: 0, duration: 0.2 }, '+=1.1')
+    .set(typing, { display: 'none' })
+    .to(msgs[1], { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.8)', transformOrigin: 'right bottom' }, '<0.05')
+    .to(msgs[2], { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.8)', transformOrigin: 'left bottom' }, '+=0.6');
 }
 
 /* Active nav link tracking */
