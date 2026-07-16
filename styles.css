@@ -2502,8 +2502,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
 
 
 /* ---------------- Earnings calculator ---------------- */
-.calc { padding: clamp(10px, 1.6vw, 24px) clamp(20px, 6vw, 96px) clamp(64px, 8vw, 108px); max-width: 1440px; margin: 0 auto; }
-.calc__head { max-width: 560px; margin-bottom: clamp(30px, 4vw, 50px); }
+.calc { padding: clamp(28px, 3.6vw, 56px) clamp(20px, 6vw, 96px) clamp(64px, 8vw, 108px); max-width: 1440px; margin: 0 auto; }
+.calc__head { max-width: 560px; margin-bottom: clamp(24px, 3vw, 40px); }
 .calc__head h2 {
   font-family: var(--font-display);
   font-weight: 700;
