@@ -1145,8 +1145,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .showcase {
   margin-top: clamp(56px, 7vw, 100px);
   display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  gap: clamp(36px, 5vw, 88px);
+  grid-template-columns: 1.25fr .95fr;
+  gap: clamp(28px, 3.5vw, 60px);
   align-items: center;
 }
 .showcase__device { margin: 0; display: flex; justify-content: center; }
@@ -1207,8 +1207,10 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 .handshot {
   position: relative;
-  width: min(580px, 92vw);
+  width: min(880px, 118%);
+  max-width: none;
   height: auto;
+  margin-left: max(-9%, -80px);
   filter: drop-shadow(0 30px 60px rgba(0,0,0,.6));
 }
 
@@ -2298,6 +2300,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .bcell--img { min-height: 280px; }
   .team__grid { grid-template-columns: repeat(2, 1fr); }
   .showcase { grid-template-columns: 1fr; }
+  .handshot { width: 100%; margin-left: 0; }
   .faq__wrap { grid-template-columns: 1fr; }
   .chatwin { position: static; margin: 0 auto; }
   .traffic { grid-template-columns: 1fr; }
