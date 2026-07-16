@@ -172,19 +172,6 @@ html { scrollbar-color: #2c2c2c var(--black); }
 }
 
 /* nav telegram icon */
-.nav__tg {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  color: var(--muted);
-  background: rgba(10, 12, 11, .7);
-  transition: color .25s ease, border-color .25s ease;
-}
-.nav__tg:hover { color: var(--green); border-color: var(--green); }
 
 /* ---------------- Language switcher (flag dropdown) ---------------- */
 
@@ -1080,11 +1067,13 @@ html { scrollbar-color: #2c2c2c var(--black); }
   gap: 14px;
 }
 .product {
+  --ppad: clamp(22px, 2vw, 28px);
   position: relative;
   border: 1px solid var(--border);
   border-radius: 2px;
-  padding: clamp(24px, 2.2vw, 34px);
+  padding: var(--ppad);
   min-height: 320px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background:
@@ -1093,24 +1082,40 @@ html { scrollbar-color: #2c2c2c var(--black); }
   transition: border-color .3s ease, transform .3s ease, box-shadow .4s ease;
 }
 .product:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.35), 0 0 46px rgba(46,166,100,.15); }
-.product__icon {
-  position: absolute;
-  top: clamp(20px, 2vw, 30px);
-  right: clamp(20px, 2vw, 30px);
-  width: 28px;
-  height: 28px;
-  color: #9aa09c;
-  transition: color .3s ease;
-}
-.product:hover .product__icon { color: var(--white); }
 .product__suits { color: var(--muted); letter-spacing: .18em; }
 
+.product__media {
+  margin: calc(var(--ppad) * -1) calc(var(--ppad) * -1) var(--ppad);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.product__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transition: transform .6s cubic-bezier(.2,.6,.2,1);
+}
+.product:hover .product__media img { transform: scale(1.08); }
+.product__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(16,19,18,.32), transparent 34%, transparent 72%, rgba(16,19,18,.5));
+  pointer-events: none;
+}
 .product__no {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 1;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: .22em;
-  color: var(--muted);
-  margin-bottom: 46px;
+  color: rgba(244,244,244,.85);
 }
 .product__name {
   font-family: var(--font-display);
