@@ -438,7 +438,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: calc(var(--nav-h) + 24px) 24px 48px;
+  /* bottom padding reserves room for the stats board overlapping the hero */
+  padding: calc(var(--nav-h) + 24px) 24px calc(40px + clamp(44px, 6vw, 88px));
   max-width: 1100px;
 }
 
@@ -855,10 +856,12 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .reel {
   display: inline-block;
   height: 1em;
-  overflow: hidden;
+  overflow: clip;
+  clip-path: inset(0);
+  contain: paint;
   vertical-align: top;
 }
-.reel__strip { display: block; will-change: transform; }
+.reel__strip { display: block; }
 .reel__strip span { display: block; height: 1em; line-height: 1; }
 .reel__gap { display: inline-block; width: .26em; }
 
