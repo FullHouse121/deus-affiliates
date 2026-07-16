@@ -344,15 +344,38 @@ if (!reduced) {
 
 /* Stat counters */
 if (!reduced) {
+  /* slot-reel counters — digits spin and settle like reels */
   document.querySelectorAll('[data-count]').forEach((el) => {
-    const end = parseInt(el.dataset.count, 10);
-    const obj = { v: 0 };
-    gsap.to(obj, {
-      v: end,
-      duration: 1.6,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-      onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString('en-US').replace(/,/g, ' '); },
+    const str = parseInt(el.dataset.count, 10).toLocaleString('en-US').replace(/,/g, ' ');
+    el.textContent = '';
+    const strips = [];
+    [...str].forEach((ch, i) => {
+      if (!/\d/.test(ch)) {
+        const gap = document.createElement('span');
+        gap.className = 'reel__gap';
+        el.appendChild(gap);
+        return;
+      }
+      const reel = document.createElement('span');
+      reel.className = 'reel';
+      const strip = document.createElement('span');
+      strip.className = 'reel__strip';
+      const target = 10 + parseInt(ch, 10); /* one full loop, then land */
+      for (let d = 0; d <= target; d++) {
+        const cell = document.createElement('span');
+        cell.textContent = String(d % 10);
+        strip.appendChild(cell);
+      }
+      reel.appendChild(strip);
+      el.appendChild(reel);
+      strips.push([strip, target, i]);
+    });
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 92%',
+      once: true,
+      onEnter: () => strips.forEach(([strip, target, i]) =>
+        gsap.fromTo(strip, { y: 0 }, { y: `-${target}em`, duration: 1.1 + i * 0.18, ease: 'back.out(1.25)', delay: 0.1 })),
     });
   });
 } else {

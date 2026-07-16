@@ -809,37 +809,75 @@ html { scrollbar-color: #2c2c2c var(--black); }
 
 /* ---------------- Stats strip ---------------- */
 
-.stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--ink); }
+.stats { position: relative; z-index: 3; padding: 0 clamp(16px, 3vw, 48px); }
 .stats__inner {
-  max-width: 1440px;
-  margin: 0 auto;
+  max-width: 1240px;
+  margin: calc(-1 * clamp(44px, 6vw, 88px)) auto 0;
+  padding: clamp(24px, 2.6vw, 40px) clamp(24px, 3vw, 52px) clamp(26px, 2.8vw, 44px);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(4, 19, 10, .16) 1px, transparent 1.6px) 0 0 / 13px 13px,
+    linear-gradient(120deg, #34b872, var(--green) 55%, #27995b);
+  border-radius: 3px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .5), 0 0 70px rgba(46, 166, 100, .18);
+}
+.stats__intro {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: rgba(4, 19, 10, .78);
+  margin-bottom: clamp(18px, 2vw, 26px);
+}
+.stats__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  column-gap: clamp(18px, 2.4vw, 40px);
 }
 .stat {
-  padding: clamp(30px, 3.4vw, 48px) clamp(20px, 3vw, 44px);
-  border-left: 1px solid var(--border);
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding-left: clamp(18px, 2vw, 30px);
 }
-.stat:first-child { border-left: 0; }
+.stat:first-child { padding-left: 0; }
+.stat + .stat::before {
+  content: "\2660";
+  position: absolute;
+  left: calc(-0.5 * clamp(18px, 2.4vw, 40px));
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  line-height: 1;
+  color: rgba(4, 19, 10, .45);
+}
+.stat:nth-child(3)::before { content: "\2665"; }
+.stat:nth-child(4)::before { content: "\2666"; }
+.reel {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+.reel__strip { display: block; will-change: transform; }
+.reel__strip span { display: block; height: 1em; line-height: 1; }
+.reel__gap { display: inline-block; width: .26em; }
+
 .stat__num {
   font-variant-numeric: tabular-nums;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(38px, 4.4vw, 64px);
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: #04130a;
   line-height: 1;
 }
-.stat__num em { font-style: normal; color: var(--green); }
+.stat__num em { font-style: normal; color: var(--white); }
 .stat__label {
   font-size: 12.5px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .12em;
-  color: var(--muted);
+  color: rgba(4, 19, 10, .72);
 }
 
 /* ---------------- Deals (commission models) ---------------- */
@@ -2337,10 +2375,9 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .payouts__facts { border-left: 0; grid-template-columns: 1fr; gap: 18px; }
   .pfact { border-right: 0; border-left: 2px solid var(--green); padding: 2px 0 2px 18px; }
   .features { grid-template-columns: repeat(2, 1fr); }
-  .stats__inner { grid-template-columns: repeat(2, 1fr); }
-  .stat { border-top: 1px solid var(--border); }
-  .stat:nth-child(-n+2) { border-top: 0; }
-  .stat:nth-child(odd) { border-left: 0; }
+  .stats__grid { grid-template-columns: repeat(2, 1fr); row-gap: 22px; }
+  .stat { padding-left: 0; }
+  .stat:nth-child(3)::before { content: none; }
   .footer__inner { grid-template-columns: 1fr; gap: 34px; }
   .footer__legal { flex-direction: column; }
 }
