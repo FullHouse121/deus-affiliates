@@ -816,16 +816,17 @@ html { scrollbar-color: #2c2c2c var(--black); }
   margin: calc(-1 * clamp(44px, 6vw, 88px)) auto 0;
   padding: clamp(24px, 2.6vw, 40px) clamp(24px, 3vw, 52px) clamp(26px, 2.8vw, 44px);
   background:
-    radial-gradient(circle at 1px 1px, rgba(4, 19, 10, .16) 1px, transparent 1.6px) 0 0 / 13px 13px,
-    linear-gradient(120deg, #34b872, var(--green) 55%, #27995b);
-  border-radius: 3px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .5), 0 0 70px rgba(46, 166, 100, .18);
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .04) 1px, transparent 1.6px) 0 0 / 13px 13px,
+    rgba(13, 16, 15, .97);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55), 0 0 60px rgba(46, 166, 100, .07);
 }
 .stats__intro {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: .06em;
-  color: rgba(4, 19, 10, .78);
+  color: var(--muted);
   margin-bottom: clamp(18px, 2vw, 26px);
 }
 .stats__grid {
@@ -849,7 +850,8 @@ html { scrollbar-color: #2c2c2c var(--black); }
   transform: translate(-50%, -50%);
   font-size: 15px;
   line-height: 1;
-  color: rgba(4, 19, 10, .45);
+  color: var(--green);
+  opacity: .5;
 }
 .stat:nth-child(3)::before { content: "\2665"; }
 .stat:nth-child(4)::before { content: "\2666"; }
@@ -871,16 +873,16 @@ html { scrollbar-color: #2c2c2c var(--black); }
   font-weight: 700;
   font-size: clamp(38px, 4.4vw, 64px);
   letter-spacing: -0.02em;
-  color: #04130a;
+  color: var(--white);
   line-height: 1;
 }
-.stat__num em { font-style: normal; color: var(--white); }
+.stat__num em { font-style: normal; color: var(--green); }
 .stat__label {
   font-size: 12.5px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .12em;
-  color: rgba(4, 19, 10, .72);
+  color: var(--muted);
 }
 
 /* ---------------- Deals (commission models) ---------------- */
