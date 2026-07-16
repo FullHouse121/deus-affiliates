@@ -473,6 +473,20 @@ document.querySelectorAll('.geochips span[data-geo]').forEach((chip) => {
   chip.addEventListener('mouseleave', () => pin.classList.remove('is-hot'));
 });
 
+/* Deal-model segmented toggle → hidden field for the Netlify payload */
+document.querySelectorAll('.seg').forEach((seg) => {
+  seg.addEventListener('click', () => {
+    document.querySelectorAll('.seg').forEach((s) => s.classList.toggle('is-active', s === seg));
+    const hidden = document.querySelector('input[name="deal_model"]');
+    if (hidden) hidden.value = seg.dataset.model;
+  });
+});
+
+/* phone mock idles with a slow float until the real product shot replaces it */
+if (!reduced && document.querySelector('.phonemock')) {
+  gsap.to('.phonemock', { y: -10, rotation: 0.6, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+}
+
 /* Signup form — AJAX submit to Netlify Forms, inline success state */
 const signupForm = document.querySelector('.signup');
 if (signupForm) {
