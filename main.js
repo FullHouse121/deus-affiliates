@@ -508,12 +508,15 @@ document.querySelectorAll('.seg').forEach((seg) => {
     const ftd = calc.querySelector('[data-calc-ftd]');
     const cpa = calc.querySelector('[data-calc-cpa]');
     const ngr = calc.querySelector('[data-calc-ngr]');
+    const lif = calc.querySelector('[data-calc-lif]');
     const outFtd = calc.querySelector('[data-calc-ftd-out]');
     const outCpa = calc.querySelector('[data-calc-cpa-out]');
     const outNgr = calc.querySelector('[data-calc-ngr-out]');
+    const outLif = calc.querySelector('[data-calc-lif-out]');
     const total = calc.querySelector('[data-calc-total]');
     const rowCpa = calc.querySelector('[data-calc-cparow]');
     const rowNgr = calc.querySelector('[data-calc-ngrrow]');
+    const rowLif = calc.querySelector('[data-calc-lifrow]');
     const perWeek = calc.querySelector('[data-calc-week]');
     const perMonth = calc.querySelector('[data-calc-month]');
     const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US').replace(/,/g, ' ');
@@ -522,12 +525,18 @@ document.querySelectorAll('.seg').forEach((seg) => {
       outFtd.textContent = ftd.value;
       outCpa.textContent = '$' + cpa.value;
       outNgr.textContent = '$' + ngr.value;
+      outLif.textContent = lif.value;
       const isCpa = mode === 'cpa';
       rowCpa.hidden = !isCpa;
       rowNgr.hidden = isCpa;
+      rowLif.hidden = isCpa;
       perWeek.hidden = !isCpa;
       perMonth.hidden = isCpa;
-      const target = isCpa ? ftd.value * cpa.value : ftd.value * 4.3 * ngr.value * 0.55;
+      /* RevShare compounds: your active base is roughly (monthly new
+         FTDs x avg lifetime), each paying avg NGR, at the 50% day-one share */
+      const target = isCpa
+        ? ftd.value * cpa.value
+        : ftd.value * 4.33 * ngr.value * lif.value * 0.5;
       if (reduced || !animate) { shown.v = target; total.textContent = fmt(target); return; }
       gsap.to(shown, { v: target, duration: 0.5, ease: 'power2.out', overwrite: true, onUpdate: () => { total.textContent = fmt(shown.v); } });
     };
@@ -536,7 +545,7 @@ document.querySelectorAll('.seg').forEach((seg) => {
       csegs.forEach((x) => x.classList.toggle('is-active', x === b));
       render(true);
     }));
-    [ftd, cpa, ngr].forEach((r) => r.addEventListener('input', () => render(true)));
+    [ftd, cpa, ngr, lif].forEach((r) => r.addEventListener('input', () => render(true)));
     render(false);
   }
 }
