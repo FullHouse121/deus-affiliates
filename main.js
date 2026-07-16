@@ -485,6 +485,26 @@ document.querySelectorAll('.seg').forEach((seg) => {
 });
 
 /* the product shot idles with a slow float */
+/* GEO rate lookup (advantages) */
+{
+  const sel = document.querySelector('.rates__select');
+  if (sel) {
+    const cpa = document.querySelector('.rates__cpa');
+    const nums = document.querySelector('.rates__nums');
+    const talk = document.querySelector('.rates__talk');
+    const apply = (animate) => {
+      const isTalk = sel.value === 'talk';
+      nums.hidden = isTalk;
+      talk.hidden = !isTalk;
+      const target = isTalk ? talk : nums;
+      if (!isTalk) cpa.textContent = '$' + sel.value;
+      if (animate && !reduced) gsap.fromTo(target, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+    };
+    sel.addEventListener('change', () => apply(true));
+    apply(false);
+  }
+}
+
 if (!reduced && document.querySelector('.handshot')) {
   gsap.to('.handshot', { y: -10, rotation: 0.6, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
 }
