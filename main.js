@@ -501,6 +501,48 @@ document.querySelectorAll('.seg').forEach((seg) => {
   }
 }
 
+/* earnings calculator */
+{
+  const calc = document.querySelector('.calc');
+  if (calc) {
+    let mode = 'cpa';
+    const csegs = Array.from(calc.querySelectorAll('[data-calcmode]'));
+    const ftd = calc.querySelector('[data-calc-ftd]');
+    const cpa = calc.querySelector('[data-calc-cpa]');
+    const ngr = calc.querySelector('[data-calc-ngr]');
+    const outFtd = calc.querySelector('[data-calc-ftd-out]');
+    const outCpa = calc.querySelector('[data-calc-cpa-out]');
+    const outNgr = calc.querySelector('[data-calc-ngr-out]');
+    const total = calc.querySelector('[data-calc-total]');
+    const rowCpa = calc.querySelector('[data-calc-cparow]');
+    const rowNgr = calc.querySelector('[data-calc-ngrrow]');
+    const perWeek = calc.querySelector('[data-calc-week]');
+    const perMonth = calc.querySelector('[data-calc-month]');
+    const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US').replace(/,/g, ' ');
+    const shown = { v: 0 };
+    const render = (animate) => {
+      outFtd.textContent = ftd.value;
+      outCpa.textContent = '$' + cpa.value;
+      outNgr.textContent = '$' + ngr.value;
+      const isCpa = mode === 'cpa';
+      rowCpa.hidden = !isCpa;
+      rowNgr.hidden = isCpa;
+      perWeek.hidden = !isCpa;
+      perMonth.hidden = isCpa;
+      const target = isCpa ? ftd.value * cpa.value : ftd.value * 4.3 * ngr.value * 0.55;
+      if (reduced || !animate) { shown.v = target; total.textContent = fmt(target); return; }
+      gsap.to(shown, { v: target, duration: 0.5, ease: 'power2.out', overwrite: true, onUpdate: () => { total.textContent = fmt(shown.v); } });
+    };
+    csegs.forEach((b) => b.addEventListener('click', () => {
+      mode = b.dataset.calcmode;
+      csegs.forEach((x) => x.classList.toggle('is-active', x === b));
+      render(true);
+    }));
+    [ftd, cpa, ngr].forEach((r) => r.addEventListener('input', () => render(true)));
+    render(false);
+  }
+}
+
 if (!reduced && document.querySelector('.handshot')) {
   gsap.to('.handshot', { y: -10, rotation: 0.6, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
 }
