@@ -52,6 +52,7 @@ const setLang = (lang) => {
     langTrigger.setAttribute('aria-label', 'Language: ' + currentLang.toUpperCase());
   }
   try { localStorage.setItem('deus-lang', currentLang); } catch { /* private mode */ }
+  document.dispatchEvent(new CustomEvent('deus:lang'));
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 };
 document.querySelectorAll('.lang__btn').forEach((b) => b.addEventListener('click', () => { setLang(b.dataset.lang); closeLangMenu(); }));
@@ -434,22 +435,56 @@ document.querySelectorAll('.seg').forEach((seg) => {
 });
 
 /* the product shot idles with a slow float */
-/* GEO rate lookup (advantages) */
+/* GEO rate lookup — custom listbox in house style */
 {
-  const sel = document.querySelector('.rates__select');
-  if (sel) {
+  const rsel = document.querySelector('[data-rsel]');
+  if (rsel) {
+    const trigger = rsel.querySelector('.rsel__trigger');
+    const valueEl = rsel.querySelector('.rsel__value');
+    const menu = rsel.querySelector('.rsel__menu');
+    const optEls = Array.from(rsel.querySelectorAll('.rsel__opt'));
     const cpa = document.querySelector('.rates__cpa');
     const nums = document.querySelector('.rates__nums');
     const talk = document.querySelector('.rates__talk');
+    const selectedOpt = () => rsel.querySelector('.rsel__opt[aria-selected="true"]') || optEls[0];
+    const syncLabel = () => { valueEl.textContent = selectedOpt().textContent; };
+    const closeMenu = () => { rsel.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); };
+    const openMenu = () => {
+      rsel.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      const cur = selectedOpt();
+      menu.scrollTop = cur.offsetTop - menu.clientHeight / 2 + cur.offsetHeight;
+    };
     const apply = (animate) => {
-      const isTalk = sel.value === 'talk';
+      const opt = selectedOpt();
+      const isTalk = opt.dataset.value === 'talk';
       nums.hidden = isTalk;
       talk.hidden = !isTalk;
       const target = isTalk ? talk : nums;
-      if (!isTalk) cpa.textContent = '$' + sel.value;
+      if (!isTalk) cpa.textContent = '$' + opt.dataset.value;
       if (animate && !reduced) gsap.fromTo(target, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
-      window.deusGlobe?.focus(sel.selectedOptions[0]?.dataset.iso || null);
+      window.deusGlobe?.focus(opt.dataset.iso || null);
     };
+    trigger.addEventListener('click', () => (rsel.classList.contains('is-open') ? closeMenu() : openMenu()));
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); openMenu(); selectedOpt().focus(); }
+    });
+    optEls.forEach((opt) => opt.addEventListener('click', () => {
+      optEls.forEach((o) => o.setAttribute('aria-selected', String(o === opt)));
+      syncLabel();
+      closeMenu();
+      trigger.focus();
+      apply(true);
+    }));
+    menu.addEventListener('keydown', (e) => {
+      const i = optEls.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); (optEls[i + 1] || optEls[0]).focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); (optEls[i - 1] || optEls[optEls.length - 1]).focus(); }
+      if (e.key === 'Escape') { closeMenu(); trigger.focus(); }
+    });
+    document.addEventListener('click', (e) => { if (!rsel.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    document.addEventListener('deus:lang', syncLabel);
     const globeHost = document.querySelector('.globe');
     if (globeHost) {
       const globeIO = new IntersectionObserver(([e]) => {
@@ -457,12 +492,11 @@ document.querySelectorAll('.seg').forEach((seg) => {
         globeIO.disconnect();
         import('./globe.js').then(({ initGlobe }) => {
           window.deusGlobe = initGlobe(globeHost);
-          window.deusGlobe?.focus(sel.selectedOptions[0]?.dataset.iso || null);
+          window.deusGlobe?.focus(selectedOpt().dataset.iso || null);
         });
       }, { rootMargin: '700px' });
       globeIO.observe(globeHost);
     }
-    sel.addEventListener('change', () => apply(true));
     apply(false);
   }
 }

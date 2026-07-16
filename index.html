@@ -826,39 +826,45 @@
           <p>Pick a market to see the working CPA baseline. Exact rate depends on your source and volumes, your manager locks it in.</p>
           <label class="rates__field">
             <span>Your market</span>
-            <select class="rates__select" aria-label="Choose your GEO">
-              <option value="80" data-iso="ar">Argentina</option>
-              <option value="320" data-iso="au">Australia</option>
-              <option value="300" data-iso="at">Austria</option>
-              <option value="70" data-iso="az">Azerbaijan</option>
-              <option value="35" data-iso="bd">Bangladesh</option>
-              <option value="120" selected data-iso="br">Brazil</option>
-              <option value="300" data-iso="ca">Canada</option>
-              <option value="100" data-iso="cl">Chile</option>
-              <option value="75" data-iso="co">Colombia</option>
-              <option value="180" data-iso="cz">Czechia</option>
-              <option value="300" data-iso="fr">France</option>
-              <option value="350" data-iso="de">Germany</option>
-              <option value="170" data-iso="gr">Greece</option>
-              <option value="60" data-iso="in">India</option>
-              <option value="65" data-iso="id">Indonesia</option>
-              <option value="280" data-iso="it">Italy</option>
-              <option value="220" data-iso="jp">Japan</option>
-              <option value="90" data-iso="kz">Kazakhstan</option>
-              <option value="90" data-iso="mx">Mexico</option>
-              <option value="70" data-iso="pe">Peru</option>
-              <option value="70" data-iso="ph">Philippines</option>
-              <option value="200" data-iso="pl">Poland</option>
-              <option value="220" data-iso="pt">Portugal</option>
-              <option value="150" data-iso="ro">Romania</option>
-              <option value="250" data-iso="es">Spain</option>
-              <option value="350" data-iso="ch">Switzerland</option>
-              <option value="75" data-iso="th">Thailand</option>
-              <option value="140" data-iso="tr">Turkey</option>
-              <option value="55" data-iso="uz">Uzbekistan</option>
-              <option value="60" data-iso="vn">Vietnam</option>
-              <option value="talk">My GEO isn't listed</option>
-            </select>
+            <div class="rsel" data-rsel>
+              <button class="rates__select rsel__trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Choose your GEO">
+                <span class="rsel__value">Brazil</span>
+                <svg viewBox="0 0 12 8" width="11" height="8" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"/></svg>
+              </button>
+              <div class="rsel__menu" role="listbox" aria-label="Markets">
+              <button class="rsel__opt" type="button" role="option" data-value="80" data-iso="ar" aria-selected="false">Argentina</button>
+              <button class="rsel__opt" type="button" role="option" data-value="320" data-iso="au" aria-selected="false">Australia</button>
+              <button class="rsel__opt" type="button" role="option" data-value="300" data-iso="at" aria-selected="false">Austria</button>
+              <button class="rsel__opt" type="button" role="option" data-value="70" data-iso="az" aria-selected="false">Azerbaijan</button>
+              <button class="rsel__opt" type="button" role="option" data-value="35" data-iso="bd" aria-selected="false">Bangladesh</button>
+              <button class="rsel__opt" type="button" role="option" data-value="120" data-iso="br" aria-selected="true">Brazil</button>
+              <button class="rsel__opt" type="button" role="option" data-value="300" data-iso="ca" aria-selected="false">Canada</button>
+              <button class="rsel__opt" type="button" role="option" data-value="100" data-iso="cl" aria-selected="false">Chile</button>
+              <button class="rsel__opt" type="button" role="option" data-value="75" data-iso="co" aria-selected="false">Colombia</button>
+              <button class="rsel__opt" type="button" role="option" data-value="180" data-iso="cz" aria-selected="false">Czechia</button>
+              <button class="rsel__opt" type="button" role="option" data-value="300" data-iso="fr" aria-selected="false">France</button>
+              <button class="rsel__opt" type="button" role="option" data-value="350" data-iso="de" aria-selected="false">Germany</button>
+              <button class="rsel__opt" type="button" role="option" data-value="170" data-iso="gr" aria-selected="false">Greece</button>
+              <button class="rsel__opt" type="button" role="option" data-value="60" data-iso="in" aria-selected="false">India</button>
+              <button class="rsel__opt" type="button" role="option" data-value="65" data-iso="id" aria-selected="false">Indonesia</button>
+              <button class="rsel__opt" type="button" role="option" data-value="280" data-iso="it" aria-selected="false">Italy</button>
+              <button class="rsel__opt" type="button" role="option" data-value="220" data-iso="jp" aria-selected="false">Japan</button>
+              <button class="rsel__opt" type="button" role="option" data-value="90" data-iso="kz" aria-selected="false">Kazakhstan</button>
+              <button class="rsel__opt" type="button" role="option" data-value="90" data-iso="mx" aria-selected="false">Mexico</button>
+              <button class="rsel__opt" type="button" role="option" data-value="70" data-iso="pe" aria-selected="false">Peru</button>
+              <button class="rsel__opt" type="button" role="option" data-value="70" data-iso="ph" aria-selected="false">Philippines</button>
+              <button class="rsel__opt" type="button" role="option" data-value="200" data-iso="pl" aria-selected="false">Poland</button>
+              <button class="rsel__opt" type="button" role="option" data-value="220" data-iso="pt" aria-selected="false">Portugal</button>
+              <button class="rsel__opt" type="button" role="option" data-value="150" data-iso="ro" aria-selected="false">Romania</button>
+              <button class="rsel__opt" type="button" role="option" data-value="250" data-iso="es" aria-selected="false">Spain</button>
+              <button class="rsel__opt" type="button" role="option" data-value="350" data-iso="ch" aria-selected="false">Switzerland</button>
+              <button class="rsel__opt" type="button" role="option" data-value="75" data-iso="th" aria-selected="false">Thailand</button>
+              <button class="rsel__opt" type="button" role="option" data-value="140" data-iso="tr" aria-selected="false">Turkey</button>
+              <button class="rsel__opt" type="button" role="option" data-value="55" data-iso="uz" aria-selected="false">Uzbekistan</button>
+              <button class="rsel__opt" type="button" role="option" data-value="60" data-iso="vn" aria-selected="false">Vietnam</button>
+              <button class="rsel__opt rsel__opt--talk" type="button" role="option" data-value="talk" aria-selected="false">My GEO isn't listed</button>
+              </div>
+            </div>
           </label>
         </div>
         <div class="rates__result">
