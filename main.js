@@ -533,6 +533,11 @@ if (topFab) {
   });
 }
 
+/* payout feed — endless upward stream */
+if (!reduced && document.querySelector('.paynotifs__track')) {
+  gsap.to('.paynotifs__track', { yPercent: -50, duration: 16, ease: 'none', repeat: -1 });
+}
+
 /* FAQ chat — the conversation plays out: msg, typing…, reply, msg */
 if (!reduced && document.querySelector('.chatwin')) {
   const msgs = gsap.utils.toArray('.chatwin__body .chat__msg:not(.chat__typing)');

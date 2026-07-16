@@ -1291,10 +1291,51 @@ html { scrollbar-color: #2c2c2c var(--black); }
   margin: 0 auto;
   padding: clamp(56px, 7vw, 96px) clamp(20px, 6vw, 96px);
   display: grid;
-  grid-template-columns: 1.1fr 1.6fr;
-  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns: 1.25fr .75fr;
+  gap: clamp(32px, 5vw, 88px);
   align-items: center;
 }
+.payouts__copy .payouts__facts { margin: 30px 0 26px; }
+
+/* live payout feed */
+.paynotifs {
+  height: 300px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+.paynotifs__track { display: flex; flex-direction: column; gap: 10px; }
+.paynotif {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(13, 16, 15, .92);
+  padding: 12px 14px;
+}
+.paynotif i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 4px;
+  background: rgba(46,166,100,.14);
+  color: var(--green);
+}
+.paynotif strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--white);
+}
+.paynotif p { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.paynotif time { margin-left: auto; font-size: 10.5px; color: #6f7472; font-variant-numeric: tabular-nums; }
 .payouts__head h2 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1324,11 +1365,16 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .payouts__methods { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
 .paychip img {
   display: block;
-  height: 15px;
   width: auto;
   filter: brightness(0) invert(1);
   opacity: .85;
 }
+.pay--usdt { height: 17px; }
+.pay--btc { height: 17px; }
+.pay--visa { height: 12px; }
+.pay--mc { height: 19px; }
+.pay--skrill { height: 13px; }
+.pay--neteller { height: 12px; }
 .payouts__methods span {
   font-size: 12px;
   font-weight: 600;
@@ -2155,6 +2201,7 @@ html { scrollbar-color: #2c2c2c var(--black); }
   .conf__date { grid-column: 1 / -1; }
   .conf__cta { grid-column: 1 / -1; }
   .payouts__inner { grid-template-columns: 1fr; }
+  .paynotifs { height: 240px; max-width: 480px; }
   .payouts__facts { border-left: 0; grid-template-columns: 1fr; gap: 18px; }
   .pfact { border-right: 0; border-left: 2px solid var(--green); padding: 2px 0 2px 18px; }
   .features { grid-template-columns: repeat(2, 1fr); }
