@@ -1175,77 +1175,30 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .phonemock__screen {
   height: 100%;
   border-radius: 30px;
-  background: linear-gradient(180deg, #0e100f, #090b0a);
+  background: #090b0a;
   overflow: hidden;
-  padding: 18px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
-.pm__top { display: flex; justify-content: space-between; align-items: center; }
-.pm__logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 13px;
-  letter-spacing: .18em;
-  color: var(--white);
+.phonemock__shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
-.pm__logo::after { content: ""; display: inline-block; width: 5px; height: 5px; background: var(--green); margin-left: 5px; }
-.pm__balance {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #0a130d;
-  background: var(--green);
-  border-radius: 2px;
-  padding: 5px 8px;
-  font-variant-numeric: tabular-nums;
+
+/* ---------------- Brand ticker band ---------------- */
+
+.brandband {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
-.pm__banner {
-  border-radius: 6px;
-  padding: 16px 14px;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,.12) 1px, transparent 1.5px) 0 0 / 10px 10px,
-    linear-gradient(120deg, #1d7a4c, #0f3d27);
-}
-.pm__banner strong {
+.brandband img {
   display: block;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: .02em;
-  color: #eafff2;
+  width: 100%;
+  height: clamp(110px, 15vw, 210px);
+  object-fit: cover;
+  object-position: center 62%;
 }
-.pm__banner span { font-size: 11px; color: rgba(234,255,242,.75); }
-.pm__label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.pm__tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex: 1; }
-.pm__tile {
-  border-radius: 6px;
-  display: flex;
-  align-items: flex-end;
-  padding: 8px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.85);
-  min-height: 66px;
-}
-.pm__tile--a { background: linear-gradient(160deg, #2ea664, #123a24); }
-.pm__tile--b { background: linear-gradient(160deg, #3b3f3d, #151716); }
-.pm__tile--c { background: linear-gradient(160deg, #42d886, #145233); }
-.pm__tile--d { background: linear-gradient(160deg, #24312a, #0c100e); }
-.pm__tile--e { background: linear-gradient(160deg, #1d7a4c, #0a1f14); }
-.pm__tile--f { background: linear-gradient(160deg, #4b5450, #171b19); }
-.pm__nav { display: flex; justify-content: space-around; padding: 8px 6px 2px; border-top: 1px solid #1d201e; }
-.pm__nav i { width: 14px; height: 14px; border-radius: 2px; background: #2a2e2c; }
-.pm__nav i.on { background: var(--green); }
 
 /* ---------------- Providers band ---------------- */
 
