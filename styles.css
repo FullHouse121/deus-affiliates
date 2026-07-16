@@ -455,24 +455,6 @@ html { scrollbar-color: #2c2c2c var(--black); }
   max-width: 1100px;
 }
 
-.hero__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid rgba(46,166,100,.4);
-  border-radius: 2px;
-  background: rgba(10, 14, 12, .6);
-  padding: 9px 16px;
-  margin-bottom: 26px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--green);
-}
-.hero__eyebrow i { width: 7px; height: 7px; background: var(--green); animation: geopulse-dot 2s ease-in-out infinite; }
-.js .hero__eyebrow { opacity: 0; }
-
 .hero__title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -2254,5 +2236,5 @@ html { scrollbar-color: #2c2c2c var(--black); }
 
 @media (prefers-reduced-motion: reduce) {
   .js .hero__title .l > span { transform: none; }
-  .js .hero__sub, .js .hero__cta, .js .hero__eyebrow { opacity: 1; }
+  .js .hero__sub, .js .hero__cta { opacity: 1; }
 }

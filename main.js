@@ -185,7 +185,6 @@ const heroEntrance = () => {
   if (cine) tl.fromTo(document.documentElement, { '--cineblur': '18px' }, { '--cineblur': '5px', duration: 2.1, ease: 'expo.out' }, 0);
   tl.to('.hero__bar--top', { yPercent: -101, duration: 1.05, ease: 'power4.inOut' }, 0.6)
     .to('.hero__bar--bottom', { yPercent: 101, duration: 1.05, ease: 'power4.inOut' }, 0.6)
-    .fromTo('.hero__eyebrow', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0.5)
     .to('.hero__title .l > span', { y: 0, duration: 1.15, stagger: 0.09 }, 0.55)
     .fromTo('.hero__sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.0)
     .fromTo('.hero__cta', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 1.12);
@@ -202,7 +201,6 @@ const returning = (() => {
 const heroQuickEntrance = () => {
   gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: () => { startIdleCinema(); startExitShot(); } })
     .from('.hero__poster', { scale: 1.12, opacity: 0, duration: 0.9, ease: 'power2.out' }, 0)
-    .fromTo('.hero__eyebrow', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 0.05)
     .to('.hero__title .l > span', { y: 0, duration: 0.8, stagger: 0.06 }, 0.05)
     .fromTo('.hero__sub', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.3)
     .fromTo('.hero__cta', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.4);
@@ -229,7 +227,7 @@ if (!reduced && returning) {
 } else {
   loader.remove();
   document.querySelectorAll('.hero__title .l > span').forEach(el => el.style.transform = 'none');
-  document.querySelectorAll('.hero__sub, .hero__cta, .hero__eyebrow').forEach(el => el.style.opacity = 1);
+  document.querySelectorAll('.hero__sub, .hero__cta').forEach(el => el.style.opacity = 1);
 }
 
 /* Poster mouse parallax (bw + color layers move as one so they stay aligned) */
