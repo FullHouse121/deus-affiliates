@@ -468,12 +468,6 @@ if (cine) {
   }
 }
 
-document.querySelectorAll('.geochips span[data-geo]').forEach((chip) => {
-  const pin = document.querySelector(`.geopin[data-geo="${chip.dataset.geo}"]`);
-  if (!pin) return;
-  chip.addEventListener('mouseenter', () => pin.classList.add('is-hot'));
-  chip.addEventListener('mouseleave', () => pin.classList.remove('is-hot'));
-});
 
 /* Deal-model segmented toggle → hidden field for the Netlify payload */
 document.querySelectorAll('.seg').forEach((seg) => {
@@ -499,6 +493,8 @@ document.querySelectorAll('.seg').forEach((seg) => {
       const target = isTalk ? talk : nums;
       if (!isTalk) cpa.textContent = '$' + sel.value;
       if (animate && !reduced) gsap.fromTo(target, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+      const geo = sel.selectedOptions[0]?.dataset.geo;
+      document.querySelectorAll('.geopin').forEach((pin) => pin.classList.toggle('is-hot', pin.dataset.geo === geo));
     };
     sel.addEventListener('change', () => apply(true));
     apply(false);
