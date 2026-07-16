@@ -204,27 +204,40 @@
         </article>
 
         <article class="bcell bcell--chart">
-          <svg class="bcell__chart" viewBox="0 0 400 170" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="chartfill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#2ea664" stop-opacity=".38" />
-                <stop offset="100%" stop-color="#2ea664" stop-opacity="0" />
-              </linearGradient>
-            </defs>
-            <g stroke="#2e3330" stroke-width="1" stroke-dasharray="1 7">
-              <line x1="0" y1="46" x2="400" y2="46" />
-              <line x1="0" y1="88" x2="400" y2="88" />
-              <line x1="0" y1="130" x2="400" y2="130" />
-            </g>
-            <path class="chartarea" d="M0,152 L50,140 L100,144 L150,118 L200,104 L250,72 L300,58 L350,28 L386,14 L386,170 L0,170 Z" fill="url(#chartfill)" />
-            <path class="chartline" d="M0,152 L50,140 L100,144 L150,118 L200,104 L250,72 L300,58 L350,28 L386,14" fill="none" stroke="#2ea664" stroke-width="2.5" vector-effect="non-scaling-stroke" />
-          </svg>
-          <span class="chartnode" aria-hidden="true"></span>
-          <span class="chartlab chartlab--start" aria-hidden="true">RevShare 50%</span>
-          <span class="chartlab chartlab--end" aria-hidden="true">60%</span>
-          <h3>Built to scale</h3>
-          <p>Caps rise as your volume proves out. Rates, creatives and GEOs get reviewed whenever you're ready to push further.</p>
-          <p class="bcell__meta">On the road all year. Meet us at SiGMA, SBC Summit &amp; Affiliate World</p>
+          <div class="chart__copy">
+            <h3>Built to scale</h3>
+            <p>Caps rise as your volume proves out. Rates, creatives and GEOs get reviewed whenever you're ready to push further.</p>
+            <p class="bcell__meta">On the road all year. Meet us at SiGMA, SBC Summit &amp; Affiliate World</p>
+          </div>
+          <div class="chart" data-chart aria-label="Example partner payout growth over 12 weeks">
+            <svg class="chart__svg" viewBox="0 0 720 260" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="chartfill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2ea664" stop-opacity=".38" />
+                  <stop offset="100%" stop-color="#2ea664" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <g stroke="#2e3330" stroke-width="1" stroke-dasharray="1 7">
+                <line x1="0" y1="50.3" x2="720" y2="50.3" />
+                <line x1="0" y1="115.5" x2="720" y2="115.5" />
+                <line x1="0" y1="180.8" x2="720" y2="180.8" />
+              </g>
+              <path class="chartarea" d="M8.0,243.1 L72.0,239.2 L136.0,232.1 L200.0,223.2 L264.0,212.6 L328.0,200.3 L392.0,185.7 L456.0,162.8 L520.0,143.3 L584.0,115.5 L648.0,84.6 L712.0,43.8 L712.0,260 L8.0,260 Z" fill="url(#chartfill)" />
+              <path class="chartline" d="M8.0,243.1 L72.0,239.2 L136.0,232.1 L200.0,223.2 L264.0,212.6 L328.0,200.3 L392.0,185.7 L456.0,162.8 L520.0,143.3 L584.0,115.5 L648.0,84.6 L712.0,43.8" fill="none" stroke="#2ea664" stroke-width="2.5" vector-effect="non-scaling-stroke" />
+            </svg>
+            <span class="chart__ylab" style="top:19.3%" aria-hidden="true">$12k</span>
+            <span class="chart__ylab" style="top:44.4%" aria-hidden="true">$8k</span>
+            <span class="chart__ylab" style="top:69.5%" aria-hidden="true">$4k</span>
+            <span class="chart__mark" style="left:1.1%;top:93.5%" aria-hidden="true"></span>
+            <span class="chart__mark" style="left:27.8%;top:85.8%" aria-hidden="true"></span>
+            <span class="chart__mark" style="left:63.3%;top:62.6%" aria-hidden="true"></span>
+            <span class="chart__mark chart__mark--end" style="left:98.9%;top:16.8%" aria-hidden="true"></span>
+            <span class="chart__flag" style="left:1.1%;top:93.5%" data-flag>First payout</span>
+            <span class="chart__flag" style="left:27.8%;top:85.8%" data-flag>Cap bump</span>
+            <span class="chart__flag" style="left:63.3%;top:62.6%" data-flag>RevShare 55%</span>
+            <span class="chart__flag chart__flag--end" style="left:98.9%;top:16.8%" data-flag>RevShare 60%</span>
+            <span class="chart__tip" hidden aria-hidden="true"><b data-tip-val></b><i><span>Week</span> <em data-tip-week></em></i></span>
+          </div>
         </article>
 
       </div>

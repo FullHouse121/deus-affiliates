@@ -401,24 +401,67 @@ faqItems.forEach((item) => {
 });
 
 /* Growth chart — draws itself in, then keeps breathing like a live feed */
-const chartLine = document.querySelector('.chartline');
-if (chartLine && !reduced) {
-  // same point count as the markup paths, endpoints pinned so node/badge stay put
-  const LINE_B = 'M0,152 L50,146 L100,132 L150,126 L200,94 L250,82 L300,50 L350,34 L386,14';
-  const AREA_B = LINE_B.replace('M', 'M') + ' L386,170 L0,170 Z';
-  const len = chartLine.getTotalLength();
-  gsap.set(chartLine, { strokeDasharray: len, strokeDashoffset: len });
-  gsap.set('.chartarea', { opacity: 0 });
-  gsap.set('.chartnode, .chartlab--end', { opacity: 0, scale: 0.4, transformOrigin: '50% 50%' });
-  gsap.timeline({ scrollTrigger: { trigger: '.bcell--chart', start: 'top 78%', once: true } })
-    .to(chartLine, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' })
-    .to('.chartarea', { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5')
-    .to('.chartnode, .chartlab--end', { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.5)' }, '-=0.25')
-    .call(() => {
-      gsap.set(chartLine, { strokeDasharray: 'none' }); // free the path for morphing
-      gsap.to(chartLine, { attr: { d: LINE_B }, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-      gsap.to('.chartarea', { attr: { d: AREA_B }, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+/* Built to Scale — payout-growth chart: draw-in, flag stagger,
+   sweeping value tip that then follows the pointer */
+{
+  const chart = document.querySelector('[data-chart]');
+  if (chart) {
+    const WEEKS = [180, 420, 850, 1400, 2050, 2800, 3700, 5100, 6300, 8000, 9900, 12400];
+    const PX = [1.11, 10.0, 18.89, 27.78, 36.67, 45.56, 54.44, 63.33, 72.22, 81.11, 90.0, 98.89];
+    const PY = [93.49, 91.98, 89.28, 85.83, 81.76, 77.05, 71.41, 62.63, 55.1, 44.44, 32.52, 16.84];
+    const line = chart.querySelector('.chartline');
+    const area = chart.querySelector('.chartarea');
+    const flags = chart.querySelectorAll('[data-flag]');
+    const marks = chart.querySelectorAll('.chart__mark');
+    const tip = chart.querySelector('.chart__tip');
+    const tipVal = tip.querySelector('[data-tip-val]');
+    const tipWeek = tip.querySelector('[data-tip-week]');
+    const fmt = (n) => '$' + n.toLocaleString('en-US').replace(/,/g, ' ');
+    const setTip = (i) => {
+      tipVal.textContent = fmt(WEEKS[i]);
+      tipWeek.textContent = i + 1;
+      tip.style.left = PX[i] + '%';
+      tip.style.top = PY[i] + '%';
+    };
+    let sweeping = false;
+    if (reduced) {
+      setTip(11);
+      tip.hidden = false;
+    } else {
+      const len = line.getTotalLength();
+      gsap.set(line, { strokeDasharray: len, strokeDashoffset: len });
+      gsap.set(area, { opacity: 0 });
+      gsap.set([...flags, ...marks], { opacity: 0, y: 6 });
+      gsap.timeline({ scrollTrigger: { trigger: '.bcell--chart', start: 'top 78%', once: true } })
+        .to(line, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' })
+        .to(area, { opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.6')
+        .to([...marks, ...flags], { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.08 }, '-=0.9')
+        .call(() => {
+          /* one storytelling sweep along the curve, then hand off to the pointer */
+          sweeping = true;
+          tip.hidden = false;
+          const prox = { i: 0 };
+          setTip(0);
+          gsap.to(prox, {
+            i: 11,
+            duration: 2.6,
+            ease: 'power1.inOut',
+            onUpdate: () => setTip(Math.round(prox.i)),
+            onComplete: () => { sweeping = false; gsap.delayedCall(2, () => { if (!chart.matches(':hover')) tip.hidden = true; }); },
+          });
+        });
+    }
+    chart.addEventListener('pointermove', (e) => {
+      if (sweeping || reduced) return;
+      const r = chart.getBoundingClientRect();
+      const px = ((e.clientX - r.left) / r.width) * 100;
+      let best = 0;
+      for (let i = 1; i < PX.length; i++) if (Math.abs(PX[i] - px) < Math.abs(PX[best] - px)) best = i;
+      setTip(best);
+      tip.hidden = false;
     });
+    chart.addEventListener('pointerleave', () => { if (!sweeping && !reduced) tip.hidden = true; });
+  }
 }
 
 
