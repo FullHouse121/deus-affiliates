@@ -813,25 +813,9 @@
       </header>
 
       <div class="geos__wrap" data-reveal>
-      <figure class="geomap" aria-label="World map of active GEOs">
-        <img src="assets/world-dots.svg" alt="" draggable="false" loading="lazy" decoding="async" />
-        <svg class="geoarcs" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M19.5,46.2 Q27,42 34.5,68.6" />
-          <path d="M34.5,68.6 Q42,28 52.9,25.3" />
-          <path d="M52.9,25.3 Q61.5,14 70.2,28.1" />
-          <path d="M60.5,35.4 Q67,28 73.3,47.6" />
-          <path d="M73.3,47.6 Q76.8,40 80.0,50.5" />
-        </svg>
-        <span class="geowave" aria-hidden="true"></span>
-        <span class="geopin" style="left:34.5%;top:68.6%" data-geo="br"><i></i><em>Brazil</em></span>
-        <span class="geopin" style="left:19.5%;top:46.2%" data-geo="mx"><i></i><em>Mexico</em></span>
-        <span class="geopin" style="left:31.1%;top:81.6%" data-geo="ar"><i></i><em>Argentina</em></span>
-        <span class="geopin" style="left:52.9%;top:25.3%" data-geo="de"><i></i><em>Germany</em></span>
-        <span class="geopin" style="left:60.5%;top:35.4%" data-geo="tr"><i></i><em>Turkey</em></span>
-        <span class="geopin" style="left:70.2%;top:28.1%" data-geo="kz"><i></i><em>Kazakhstan</em></span>
-        <span class="geopin" style="left:73.3%;top:47.6%" data-geo="in"><i></i><em>India</em></span>
-        <span class="geopin" style="left:80.0%;top:50.5%" data-geo="th"><i></i><em>Thailand</em></span>
-      </figure>
+      <div class="globe" aria-label="Interactive globe of active GEOs">
+        <canvas class="globe__canvas"></canvas>
+      </div>
 
 
       <div class="rates">
@@ -842,36 +826,36 @@
           <label class="rates__field">
             <span>Your market</span>
             <select class="rates__select" aria-label="Choose your GEO">
-              <option value="80" data-geo="ar">Argentina</option>
-              <option value="320">Australia</option>
-              <option value="300">Austria</option>
-              <option value="70">Azerbaijan</option>
-              <option value="35">Bangladesh</option>
-              <option value="120" selected data-geo="br">Brazil</option>
-              <option value="300">Canada</option>
-              <option value="100">Chile</option>
-              <option value="75">Colombia</option>
-              <option value="180">Czechia</option>
-              <option value="300">France</option>
-              <option value="350" data-geo="de">Germany</option>
-              <option value="170">Greece</option>
-              <option value="60" data-geo="in">India</option>
-              <option value="65">Indonesia</option>
-              <option value="280">Italy</option>
-              <option value="220">Japan</option>
-              <option value="90" data-geo="kz">Kazakhstan</option>
-              <option value="90" data-geo="mx">Mexico</option>
-              <option value="70">Peru</option>
-              <option value="70">Philippines</option>
-              <option value="200">Poland</option>
-              <option value="220">Portugal</option>
-              <option value="150">Romania</option>
-              <option value="250">Spain</option>
-              <option value="350">Switzerland</option>
-              <option value="75" data-geo="th">Thailand</option>
-              <option value="140" data-geo="tr">Turkey</option>
-              <option value="55">Uzbekistan</option>
-              <option value="60">Vietnam</option>
+              <option value="80" data-iso="ar">Argentina</option>
+              <option value="320" data-iso="au">Australia</option>
+              <option value="300" data-iso="at">Austria</option>
+              <option value="70" data-iso="az">Azerbaijan</option>
+              <option value="35" data-iso="bd">Bangladesh</option>
+              <option value="120" selected data-iso="br">Brazil</option>
+              <option value="300" data-iso="ca">Canada</option>
+              <option value="100" data-iso="cl">Chile</option>
+              <option value="75" data-iso="co">Colombia</option>
+              <option value="180" data-iso="cz">Czechia</option>
+              <option value="300" data-iso="fr">France</option>
+              <option value="350" data-iso="de">Germany</option>
+              <option value="170" data-iso="gr">Greece</option>
+              <option value="60" data-iso="in">India</option>
+              <option value="65" data-iso="id">Indonesia</option>
+              <option value="280" data-iso="it">Italy</option>
+              <option value="220" data-iso="jp">Japan</option>
+              <option value="90" data-iso="kz">Kazakhstan</option>
+              <option value="90" data-iso="mx">Mexico</option>
+              <option value="70" data-iso="pe">Peru</option>
+              <option value="70" data-iso="ph">Philippines</option>
+              <option value="200" data-iso="pl">Poland</option>
+              <option value="220" data-iso="pt">Portugal</option>
+              <option value="150" data-iso="ro">Romania</option>
+              <option value="250" data-iso="es">Spain</option>
+              <option value="350" data-iso="ch">Switzerland</option>
+              <option value="75" data-iso="th">Thailand</option>
+              <option value="140" data-iso="tr">Turkey</option>
+              <option value="55" data-iso="uz">Uzbekistan</option>
+              <option value="60" data-iso="vn">Vietnam</option>
               <option value="talk">My GEO isn't listed</option>
             </select>
           </label>

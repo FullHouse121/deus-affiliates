@@ -875,6 +875,26 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .deal:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.35), 0 0 46px rgba(46,166,100,.15); }
 .deal--accent { background: linear-gradient(180deg, rgba(46,166,100,.14), rgba(46,166,100,.04)), var(--ink); border-color: rgba(46,166,100,.45); box-shadow: 0 0 54px rgba(46,166,100,.10); }
 
+/* --- Globe --- */
+.globe {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.globe:active { cursor: grabbing; }
+.globe::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  background: radial-gradient(circle at 50% 55%, rgba(46,166,100,.13), transparent 62%);
+  pointer-events: none;
+}
+.globe__canvas { display: block; width: 100%; height: 100%; }
+
 /* --- GEO rate lookup (Scale Globally console) --- */
 .geos__wrap {
   display: grid;
@@ -1612,129 +1632,18 @@ html { scrollbar-color: #2c2c2c var(--black); }
 .section__head--center { margin-left: auto; margin-right: auto; text-align: center; }
 .section__head--center .section__sub { margin-left: auto; margin-right: auto; }
 
-.geomap {
-  margin: 0;
-  max-width: none;
-  position: relative;
-}
-.geomap img { width: 100%; height: auto; }
-.geomap::before {
-  content: "";
-  position: absolute;
-  inset: -8%;
-  background: radial-gradient(ellipse 55% 55% at 50% 48%, rgba(46,166,100,.09), transparent 70%);
-  pointer-events: none;
-}
-.geomap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%, transparent 55%, var(--black) 100%);
-  pointer-events: none;
-}
 
 /* traffic arcs — routes drawing between hubs in a loop */
-.geoarcs {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-.geoarcs path {
-  fill: none;
-  stroke: var(--green);
-  stroke-width: 1.1;
-  opacity: .4;
-  vector-effect: non-scaling-stroke;
-}
 
 /* transmission wave — a square pulse radiating from a hub */
-.geowave {
-  position: absolute;
-  width: 24%;
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(66,216,134,.8);
-  background: radial-gradient(circle, rgba(46,166,100,.14), transparent 70%);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-}
 
 /* live beacons — square pulse, brutalist */
-.geopin {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-.geopin i {
-  position: absolute;
-  inset: 0;
-  background: #42d886;
-  box-shadow: 0 0 14px rgba(66,216,134,.9), 0 0 34px rgba(46,166,100,.45);
-}
-.geopin::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--green);
-  animation: geopulse 2.6s cubic-bezier(.2,.6,.36,1) infinite;
-}
 @keyframes geopulse {
   0% { transform: scale(1); opacity: .9; }
   70%, 100% { transform: scale(3.4); opacity: 0; }
 }
-.geopin em {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-style: normal;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--white);
-  background: rgba(0,0,0,.82);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 4px 8px;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity .25s ease;
-  pointer-events: none;
-}
-.geopin:hover em, .geopin.is-hot em { opacity: 1; }
-.geopin.is-hot i { transform: scale(1.5); box-shadow: 0 0 16px rgba(46,166,100,.9); }
-.geopin i { transition: transform .25s ease, box-shadow .25s ease; }
 @media (prefers-reduced-motion: reduce) { .geopin::before { animation: none; opacity: 0; } }
 
-.geochips span[data-geo] { cursor: default; }
-.geochips {
-  margin: 36px auto 0;
-  max-width: 880px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-.geochips span {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 7px 12px;
-  transition: color .25s ease, border-color .25s ease;
-}
-.geochips span:hover { color: var(--white); border-color: var(--green); }
-.geochips__more { color: var(--green) !important; border-color: rgba(46,166,100,.45) !important; }
 
 .geo__cta {
   margin-top: 40px;

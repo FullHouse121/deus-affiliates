@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "gsap": "^3.12.5",
-    "lenis": "^1.1.14"
+    "lenis": "^1.1.14",
+    "three": "^0.185.1"
   },
   "devDependencies": {
+    "d3-geo": "^3.1.1",
     "dotted-map": "^3.1.0",
-    "vite": "^5.4.0"
+    "topojson-client": "^3.1.0",
+    "vite": "^5.4.0",
+    "world-atlas": "^2.0.2"
   }
 }
