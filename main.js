@@ -326,16 +326,16 @@ if (!reduced) {
     ScrollTrigger.batch(items, {
       start: 'top 90%',
       once: true,
-      onEnter: (batch) => gsap.to(batch, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', stagger: 0.08, overwrite: true }),
+      onEnter: (batch) => gsap.to(batch, { y: 0, opacity: 1, duration: 0.85, ease: 'back.out(1.2)', stagger: 0.08, overwrite: true }),
     });
   });
   gsap.utils.toArray('[data-reveal]').forEach((el) => {
     if (batched.has(el)) return;
     gsap.from(el, {
-      y: 30,
+      y: 32,
       opacity: 0,
-      duration: 0.9,
-      ease: 'power3.out',
+      duration: 0.95,
+      ease: 'back.out(1.15)',
       scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
   });

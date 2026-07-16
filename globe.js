@@ -33,7 +33,7 @@ export const initGlobe = (host) => {
     .width(host.clientWidth)
     .height(host.clientHeight || host.clientWidth)
     .showAtmosphere(true)
-    .atmosphereColor('#2ea664')
+    .atmosphereColor('#33bd74')
     .atmosphereAltitude(0.16)
     .pointOfView({ lat: -14, lng: -52, altitude: 1.9 }, 0);
 
@@ -95,7 +95,7 @@ export const initGlobe = (host) => {
       .hexPolygonResolution(3)
       .hexPolygonMargin(0.55)
       .hexPolygonAltitude(0.004)
-      .hexPolygonColor(() => 'rgba(74, 189, 120, 0.55)')
+      .hexPolygonColor(() => 'rgba(84, 199, 132, 0.55)')
 
       /* selected country: raised true-shape polygon */
       .polygonsData([])
@@ -113,7 +113,7 @@ export const initGlobe = (host) => {
       .ringAltitude(0.018)
 
       /* idle traffic arcs between hub markets */
-      .arcColor(() => ['rgba(46,166,100,0)', 'rgba(140,231,176,0.9)'])
+      .arcColor(() => ['rgba(51,189,116,0)', 'rgba(150,235,185,0.9)'])
       .arcStroke(0.32)
       .arcAltitudeAutoScale(0.38)
       .arcDashLength(0.4)
